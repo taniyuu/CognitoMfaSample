@@ -1,0 +1,12 @@
+{
+  "name": "CognitoMfaSample",
+  "displayName": "CognitoMfaSample",
+  "expo": {
+    "name": "CognitoMfaSample",
+    "slug": "CognitoMfaSample",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
