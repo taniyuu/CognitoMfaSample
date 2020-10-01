@@ -1,13 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import SignIn from "./SignIn";
+import SignInPage from "./SignInPage";
 
 const Stack = createStackNavigator();
 const Navigator: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="ログイン" component={SignIn} />
+      <Stack.Screen name="ログイン" component={SignInPage} />
     </Stack.Navigator>
   );
 };

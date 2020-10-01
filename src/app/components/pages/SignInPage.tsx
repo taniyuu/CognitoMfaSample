@@ -8,11 +8,16 @@ import {
   Keyboard,
   Platform,
   StyleSheet,
+  Button,
+  Alert,
 } from "react-native";
 
-const SignIn: React.FC = () => {
+const SignInPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const signIn = () => {
+    Alert.alert(`Simple Button pressed:${username}`);
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -42,13 +47,14 @@ const SignIn: React.FC = () => {
             autoCapitalize="none"
             secureTextEntry={true}
           />
+          <Button title="ログイン" onPress={signIn} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
 
-export default SignIn;
+export default SignInPage;
 
 const styles = StyleSheet.create({
   container: {
