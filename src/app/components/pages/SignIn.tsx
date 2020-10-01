@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,9 @@ import {
   StyleSheet,
 } from "react-native";
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -24,16 +26,21 @@ const SignIn = () => {
           <TextInput
             style={styles.formControl}
             keyboardType="default"
-            value=""
+            value={username}
+            onChangeText={(input) => setUsername(input)}
             placeholder="ユーザ名"
             returnKeyType="done"
+            autoCapitalize="none"
           />
           <TextInput
             style={styles.formControl}
             keyboardType="ascii-capable"
-            value=""
+            value={password}
+            onChangeText={(input) => setPassword(input)}
             placeholder="パスワード"
             returnKeyType="done"
+            autoCapitalize="none"
+            secureTextEntry={true}
           />
         </View>
       </TouchableWithoutFeedback>
