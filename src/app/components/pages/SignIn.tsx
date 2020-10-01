@@ -1,16 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 
 const SignIn = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home Screen</Text>
-      <TextInput
-        style={styles.formControl}
-        value=""
-        placeholder="何かやること"
-      />
-    </View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Home Screen</Text>
+        <TextInput
+          style={styles.formControl}
+          keyboardType="default"
+          value=""
+          placeholder="ユーザ名"
+          returnKeyType="done"
+        />
+        <TextInput
+          style={styles.formControl}
+          keyboardType="ascii-capable"
+          value=""
+          placeholder="パスワード"
+          returnKeyType="done"
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
