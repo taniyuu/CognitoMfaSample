@@ -12,17 +12,33 @@ import {
   Alert,
 } from "react-native";
 import CognitoAuth from "../../backend/Authn";
+import { RouteProp, StackActions } from "@react-navigation/native";
+import { RootStackParamList } from "./Navigator";
 
 // Stack Navigation
+
+type ConfirmationPageRouteProp = RouteProp<RootStackParamList, "SignUp">;
 interface Props {
+  route: ConfirmationPageRouteProp;
   navigation: any;
 }
 
-const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
+const ConfirmationPage: React.FC<Props> = ({
+  route,
+  navigation: { dispatch },
+}) => {
+  const { username } = route.params;
   const [confirmCode, setConfirmCode] = useState<string>("");
-  const signIn = () => {
-    //new CognitoAuth().signIn(username, password);
-    // Alert.alert(`Simple Button pressed:${username}`);
+  const confirmSignUp = async () => {
+    try {
+      await new CognitoAuth().confirmSignUp(username, confirmCode);
+      Alert.alert("登録完了", "ログイン画面に戻ります。", [
+        { onPress: () => dispatch(StackActions.popToTop()) },
+      ]);
+    } catch (err) {
+      // 失敗時など
+      Alert.alert("確認失敗", `${JSON.stringify(err)}`);
+    }
   };
   return (
     <KeyboardAvoidingView
@@ -34,7 +50,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <Text>Confirmation Screen</Text>
-          <Text>ユーザ名:</Text>
+          <Text>ユーザ名:{username}</Text>
 
           <TextInput
             style={styles.formControl}
@@ -44,16 +60,15 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             placeholder="確認コード"
             returnKeyType="done"
             autoCapitalize="none"
-            secureTextEntry={true}
           />
-          <Button title="確認" onPress={signIn} />
+          <Button title="確認" onPress={confirmSignUp} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
 
-export default SignInPage;
+export default ConfirmationPage;
 
 const styles = StyleSheet.create({
   container: {

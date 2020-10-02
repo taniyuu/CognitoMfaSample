@@ -8,10 +8,8 @@ import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
 import ConfirmCodePage from "./ConfirmCodePage";
 
-type RootStackParamList = {
-  SignIn: undefined;
-  //Profile: { userId: string };
-  //Feed: { sort: "latest" | "top" } | undefined;
+export type RootStackParamList = {
+  SignUp: { username: string };
 };
 
 const Stack = createStackNavigator();

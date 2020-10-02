@@ -30,7 +30,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const signUp = async () => {
     try {
       await new CognitoAuth().signUp(form);
-      navigate("確認コード入力");
+      navigate("確認コード入力", { username: form.username }); // 型が適当
     } catch (err) {
       // 失敗時など
       Alert.alert("登録失敗", `${err}`);
