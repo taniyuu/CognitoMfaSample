@@ -15,11 +15,30 @@ Auth.configure(awsConfig);
 
 class CognitoAuth {
   async signIn(username: string, password: string) {
-    console.log(Auth.configure());
     let hoge;
     try {
       const user = await Auth.signIn(username, password);
-      console.log("USER", user);
+      const {
+        signInUserSession,
+        challengeName,
+        Session: session,
+        challengeParam,
+      } = user;
+      if (signInUserSession) {
+        const { accessToken, idToken, refreshToken } = signInUserSession;
+        console.log("AccessToken", accessToken.jwtToken);
+        console.log("IdToken", idToken.jwtToken);
+        console.log("RefleshToken", refreshToken.token);
+      } else if (challengeName) {
+        console.log("USER", user);
+        console.log("SESSION", session);
+        console.log("challengeName", challengeName);
+        const { CODE_DELIVERY_DESTINATION: phoneNumber } = challengeParam;
+        console.log("DESTINATION", phoneNumber);
+      } else {
+        throw Error;
+      }
+
       hoge = user;
     } catch (err) {
       console.log("Err: ", err);
