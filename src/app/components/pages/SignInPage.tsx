@@ -11,6 +11,7 @@ import {
   StyleSheet,
   Button,
   Alert,
+  Dimensions,
 } from "react-native";
 import CognitoAuth from "../../backend/Authn";
 
@@ -18,6 +19,8 @@ import CognitoAuth from "../../backend/Authn";
 interface Props {
   navigation: any;
 }
+
+const { width } = Dimensions.get("window"); //get window size
 
 const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [username, setUsername] = useState<string>("");
@@ -97,8 +100,9 @@ const styles = StyleSheet.create({
   },
   formControl: {
     height: 40,
-    width: 160,
+    width: width * 0.8,
     padding: 8,
+    marginBottom: 8,
     borderColor: "gray",
     borderWidth: 1,
   },

@@ -10,18 +10,20 @@ import {
   StyleSheet,
   Button,
   Alert,
+  Dimensions,
 } from "react-native";
 import CognitoAuth from "../../backend/Authn";
 import { RouteProp, StackActions } from "@react-navigation/native";
 import { RootStackParamList } from "./Navigator";
 
 // Stack Navigation
-
 type ConfirmationPageRouteProp = RouteProp<RootStackParamList, "SignUp">;
 interface Props {
   route: ConfirmationPageRouteProp;
   navigation: any;
 }
+
+const { width } = Dimensions.get("window"); //get window size
 
 const ConfirmationPage: React.FC<Props> = ({
   route,
@@ -76,8 +78,9 @@ const styles = StyleSheet.create({
   },
   formControl: {
     height: 40,
-    width: 160,
+    width: width * 0.8,
     padding: 8,
+    marginBottom: 8,
     borderColor: "gray",
     borderWidth: 1,
   },

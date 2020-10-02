@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Button,
   Alert,
+  Dimensions,
 } from "react-native";
 import CognitoAuth, { SignUpForm } from "../../backend/Authn";
 
@@ -17,6 +18,8 @@ import CognitoAuth, { SignUpForm } from "../../backend/Authn";
 interface Props {
   navigation: any;
 }
+
+const { width } = Dimensions.get("window"); //get window size
 
 const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [form, setForm] = useState<SignUpForm>({
@@ -125,8 +128,9 @@ const styles = StyleSheet.create({
   },
   formControl: {
     height: 40,
-    width: 160,
+    width: width * 0.8,
     padding: 8,
+    marginBottom: 8,
     borderColor: "gray",
     borderWidth: 1,
   },
