@@ -12,8 +12,14 @@ import {
   Alert,
 } from "react-native";
 import CognitoAuth from "../../backend/Authn";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-const SignInPage: React.FC = () => {
+// Stack Navigation
+interface Props {
+  navigation: any;
+}
+
+const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const signIn = () => {
@@ -50,6 +56,7 @@ const SignInPage: React.FC = () => {
             secureTextEntry={true}
           />
           <Button title="ログイン" onPress={signIn} />
+          <Button title="新規登録" onPress={() => navigate("新規登録")} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
