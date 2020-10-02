@@ -1,3 +1,4 @@
+import { CognitoUser } from "amazon-cognito-identity-js";
 import React, { useState } from "react";
 import {
   View,
@@ -21,8 +22,34 @@ interface Props {
 const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const signIn = () => {
-    new CognitoAuth().signIn(username, password);
+  const signIn = async () => {
+    try {
+      const user = await new CognitoAuth().signIn(username, password);
+      const authUser: CognitoUser = user;
+      const userSession = authUser.getSignInUserSession();
+      if (userSession) {
+        // ログイン成功
+        Alert.alert("ログイン完了");
+        // console.log("AccessToken", userSession.getAccessToken());
+        // console.log("IdToken", userSession.getIdToken());
+        // console.log("RefleshToken", userSession.getRefreshToken());
+      } else if (user.challengeName) {
+        // チャレンジ(MFA)
+        // console.log("USER", user);
+        console.log("SESSION", user.Session);
+        console.log("challengeName", user.challengeName);
+        const { CODE_DELIVERY_DESTINATION: phoneNumber } = user.challengeParam;
+        console.log("DESTINATION", phoneNumber);
+        Alert.alert("検証コードを送信", `送信先:${phoneNumber}`);
+      } else {
+        // それ以外の場合は想定外なのでエラー
+        throw Error;
+      }
+    } catch (err) {
+      // ログイン失敗時など
+      console.log("Err: ", err);
+      Alert.alert("エラー", JSON.stringify(err));
+    }
     // Alert.alert(`Simple Button pressed:${username}`);
   };
   return (

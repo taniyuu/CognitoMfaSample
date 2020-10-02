@@ -17,35 +17,7 @@ Auth.configure(awsConfig);
 
 class CognitoAuth {
   async signIn(username: string, password: string) {
-    let hoge;
-    try {
-      const user = await Auth.signIn(username, password);
-
-      // FIXME 以下のロジックは、Controller層で分岐して、画面遷移に利用できるようにすべき?
-      const authUser: CognitoUser = user;
-      const userSession = authUser.getSignInUserSession();
-      if (userSession) {
-        // ログイン成功
-        console.log("AccessToken", userSession.getAccessToken());
-        console.log("IdToken", userSession.getIdToken());
-        console.log("RefleshToken", userSession.getRefreshToken());
-      } else if (user.challengeName) {
-        // チャレンジ(MFA)
-        // console.log("USER", user);
-        console.log("SESSION", user.Session);
-        console.log("challengeName", user.challengeName);
-        const { CODE_DELIVERY_DESTINATION: phoneNumber } = user.challengeParam;
-        console.log("DESTINATION", phoneNumber);
-      } else {
-        // それ以外の場合は想定外なのでエラー
-        throw Error;
-      }
-      hoge = user;
-    } catch (err) {
-      // ログイン失敗時など
-      console.log("Err: ", err);
-    }
-    return hoge;
+    return await Auth.signIn(username, password);
   }
   async signUp(form: SignUpForm) {
     console.log(Auth.configure());
