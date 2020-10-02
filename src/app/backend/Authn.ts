@@ -61,13 +61,13 @@ class CognitoAuth {
       },
     };
     console.log(params);
-    try {
-      const result = await Auth.signUp(params);
-      console.log(result);
-    } catch (err) {
-      // ログイン失敗時など
-      console.log("Err: ", err);
-    }
+    const result = await Auth.signUp(params);
+    console.log(result);
+  }
+  async confirmSignUp(username: string, code: string) {
+    console.log(Auth.configure());
+    const result = await Auth.confirmSignUp(username, code);
+    console.log(result);
   }
 }
 export default CognitoAuth;

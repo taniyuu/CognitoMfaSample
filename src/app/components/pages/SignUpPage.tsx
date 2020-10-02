@@ -18,7 +18,7 @@ interface Props {
   navigation: any;
 }
 
-const SignUpPage: React.FC<Props> = () => {
+const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [form, setForm] = useState<SignUpForm>({
     username: "",
     familyName: "",
@@ -27,9 +27,14 @@ const SignUpPage: React.FC<Props> = () => {
     phone: "",
     email: "",
   });
-  const signUp = () => {
-    new CognitoAuth().signUp(form);
-    // Alert.alert(`Simple Button pressed:${username}`);
+  const signUp = async () => {
+    try {
+      await new CognitoAuth().signUp(form);
+      navigate("確認コード入力");
+    } catch (err) {
+      // 失敗時など
+      Alert.alert("登録失敗", `${err}`);
+    }
   };
   return (
     <KeyboardAvoidingView

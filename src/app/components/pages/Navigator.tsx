@@ -6,6 +6,7 @@ import {
 
 import SignInPage from "./SignInPage";
 import SignUpPage from "./SignUpPage";
+import ConfirmCodePage from "./ConfirmCodePage";
 
 type RootStackParamList = {
   SignIn: undefined;
@@ -19,6 +20,7 @@ const Navigator: React.FC = () => {
     <Stack.Navigator initialRouteName="ログイン">
       <Stack.Screen name="ログイン" component={SignInPage} />
       <Stack.Screen name="新規登録" component={SignUpPage} />
+      <Stack.Screen name="確認コード入力" component={ConfirmCodePage} />
     </Stack.Navigator>
   );
 };

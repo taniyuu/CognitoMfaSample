@@ -19,10 +19,9 @@ interface Props {
 }
 
 const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [confirmCode, setConfirmCode] = useState<string>("");
   const signIn = () => {
-    new CognitoAuth().signIn(username, password);
+    //new CognitoAuth().signIn(username, password);
     // Alert.alert(`Simple Button pressed:${username}`);
   };
   return (
@@ -34,28 +33,20 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Text>Home Screen</Text>
+          <Text>Confirmation Screen</Text>
+          <Text>ユーザ名:</Text>
+
           <TextInput
             style={styles.formControl}
-            keyboardType="default"
-            value={username}
-            onChangeText={(input) => setUsername(input)}
-            placeholder="ユーザ名"
-            returnKeyType="done"
-            autoCapitalize="none"
-          />
-          <TextInput
-            style={styles.formControl}
-            keyboardType="ascii-capable"
-            value={password}
-            onChangeText={(input) => setPassword(input)}
-            placeholder="パスワード"
+            keyboardType="number-pad"
+            value={confirmCode}
+            onChangeText={(input) => setConfirmCode(input)}
+            placeholder="確認コード"
             returnKeyType="done"
             autoCapitalize="none"
             secureTextEntry={true}
           />
-          <Button title="ログイン" onPress={signIn} />
-          <Button title="新規登録" onPress={() => navigate("新規登録")} />
+          <Button title="確認" onPress={signIn} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
