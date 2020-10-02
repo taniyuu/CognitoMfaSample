@@ -11,12 +11,14 @@ import {
   Button,
   Alert,
 } from "react-native";
+import CognitoAuth from "../../backend/Authn";
 
 const SignInPage: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const signIn = () => {
-    Alert.alert(`Simple Button pressed:${username}`);
+    new CognitoAuth().signIn(username, password);
+    // Alert.alert(`Simple Button pressed:${username}`);
   };
   return (
     <KeyboardAvoidingView

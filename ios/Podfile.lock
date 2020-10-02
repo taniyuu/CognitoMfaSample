@@ -102,6 +102,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - JKBigInteger2 (0.0.5)
   - OpenSSL-Universal (1.0.2.19):
     - OpenSSL-Universal/Static (= 1.0.2.19)
   - OpenSSL-Universal/Static (1.0.2.19)
@@ -271,6 +272,12 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
+  - react-native-config (1.3.3):
+    - react-native-config/App (= 1.3.3)
+  - react-native-config/App (1.3.3):
+    - React
+  - react-native-netinfo (5.9.7):
+    - React-Core
   - react-native-safe-area-context (3.1.4):
     - React
   - React-RCTActionSheet (0.63.2):
@@ -333,6 +340,9 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
+  - RNAWSCognito (4.4.0):
+    - JKBigInteger2 (= 0.0.5)
+    - React
   - RNCMaskedView (0.1.10):
     - React
   - RNGestureHandler (1.7.0):
@@ -411,6 +421,8 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-config (from `../node_modules/react-native-config`)
+  - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -422,6 +434,7 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNAWSCognito (from `../node_modules/amazon-cognito-identity-js`)
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -453,6 +466,7 @@ SPEC REPOS:
     - Flipper-PeerTalk
     - Flipper-RSocket
     - FlipperKit
+    - JKBigInteger2
     - OpenSSL-Universal
     - YogaKit
 
@@ -511,6 +525,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-config:
+    :path: "../node_modules/react-native-config"
+  react-native-netinfo:
+    :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -533,6 +551,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAWSCognito:
+    :path: "../node_modules/amazon-cognito-identity-js"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
@@ -575,18 +595,18 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
   DoubleConversion: cde416483dac037923206447da6e1454df403714
-  EXConstants: 6ec1ea4a13ec734c7e2274bc9e5b7408d73007a1
-  EXErrorRecovery: cfb65ec51567cf57a00b2720a2367ac009298319
-  EXFileSystem: efd6c0225f90c8b2c85131d578a09e13197e8b70
-  EXFont: 91111ccdce7c739ff51c5fcb484f2dd9a9a4ce45
-  EXImageLoader: 0b33400e65955c5510a09afc2f9bb369a81e1c6e
-  EXKeepAwake: 4502a0ed7b7c5135587004e6d118acf8cea055fc
-  EXLinearGradient: 54bec9b1b4940407fc498cab6a0c49c617c8cf54
-  EXLocation: 2d7aceb4d537d418a7d80df179b451c2cff8e99d
-  EXPermissions: 5797c6c72efb411b2bbf502cd5acd841e3ffeefa
-  EXSplashScreen: 2d76799c034872fe149878a7f5621ab734c2f2ee
-  EXSQLite: 246074ef810a3b5e41c0cf8cde141adccc3b0f6b
-  EXUpdates: 48c166b7d174784352bbf3cc498e482cc05fe4c5
+  EXConstants: f486f6b4a36b86e47ab258d4d2b7b2699786fdce
+  EXErrorRecovery: 16696fe023fb46a32c3b09033abc361cfcf150a7
+  EXFileSystem: afe9b1fd937d30270bf5108ba44e2f4a1d1ad694
+  EXFont: a6a4353271395f3bb4ee528b52a5035b4b0e412a
+  EXImageLoader: 7153fb1307ac643299a9072b71da0d276f4c7789
+  EXKeepAwake: 76eed36786534f6a476748e600fa6faf07ac3d09
+  EXLinearGradient: c7ca1c2933ac240ffbc805c014a72947e227ac75
+  EXLocation: a3b92458ec5c4356c5d932fe0d2bbe552ef7f4cb
+  EXPermissions: 30cbe5b72bd209b65c00884180ad058a60bb413d
+  EXSplashScreen: c496093747ee7f4e933c6312c0f52681612592e3
+  EXSQLite: d0d8677c13e60d5db2812387f059c697be27d3fb
+  EXUpdates: 9ed0693ab1c8df9f0472cfb4549d5edccdf05849
   FBLazyVector: 3ef4a7f62e7db01092f9d517d2ebc0d0677c4a37
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
   Flipper: 33585e2d9810fe5528346be33bcf71b37bb7ae13
@@ -598,6 +618,7 @@ SPEC CHECKSUMS:
   FlipperKit: bc68102cd4952a258a23c9c1b316c7bec1fecf83
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  JKBigInteger2: e91672035c42328c48b7dd015b66812ddf40ca9b
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
   RCTRequired: f13f25e7b12f925f1f6a6a8c69d929a03c0129fe
   RCTTypeSafety: 44982c5c8e43ff4141eb519a8ddc88059acd1f3a
@@ -609,7 +630,9 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-safe-area-context: 0ed9288ed4409beabb0817b54efc047286fc84da
+  react-native-config: 9a061347e0136fdb32d43a34d60999297d672361
+  react-native-netinfo: 250dc0ca126512f618a8a2ca6a936577e1f66586
+  react-native-safe-area-context: eb91fe1fb3f7b87d9c30a7f0808407d8569d539d
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
   React-RCTBlob: 39cf0ece1927996c4466510e25d2105f67010e13
@@ -620,23 +643,24 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
+  RNAWSCognito: 1b60a33273f4ead618ee360b250286e720981216
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
   RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
   RNScreens: b748efec66e095134c7166ca333b628cd7e6f3e2
-  UMAppLoader: 939854a42e69527ee11dd17b39ebafcbfbefd05c
-  UMBarCodeScannerInterface: 198ced513a0cf8143d822620f1620bce467d02be
-  UMCameraInterface: dbcaade8d0364ba5518ae4519c63c59bf010aa89
-  UMConstantsInterface: 2ad180a29afdf28607d11d6e23c90793d294ea0e
-  UMCore: db635e8fcaf743f418484e9f9b9245bb2495f07a
-  UMFaceDetectorInterface: 24faf81d90fb00d477c674fd00b9cb005176f4a0
-  UMFileSystemInterface: 5216dca58177014de7f1157d69c70a1ec5c620bb
-  UMFontInterface: 4d0f13001fc59436125d7424cdfa7c897b699724
-  UMImageLoaderInterface: 575357942cc57ad31662659df9d5a73daa6de54c
-  UMPermissionsInterface: 208b2c5fd6756dcad739d806dfe32b9e44b9311b
-  UMReactNativeAdapter: 2c175f151cfe5ff011ced7bc79ccb08bf124f6c3
-  UMSensorsInterface: 1df848f22690ccd23a821777f00df230fe5a28e3
-  UMTaskManagerInterface: dfc62edf51844ae87dafc1fe849b594871fda1e5
+  UMAppLoader: 5db5dc03176c6238da9c8b3657a370137882a4ad
+  UMBarCodeScannerInterface: 017672479f93de88d94c3a50dfb66b5348b65989
+  UMCameraInterface: 22bd2c4bf15dcf68530368fa5704af7490818457
+  UMConstantsInterface: ff612789417aace6fd01a9c35616bc87dcdc8d97
+  UMCore: 28d7a74260813f906738533ad7dce4529d3d24ee
+  UMFaceDetectorInterface: 9bc6a197ad9d4d16ba13bfdf2340dd7f24964308
+  UMFileSystemInterface: e7795274eee76beaadaf6015bcc7f5da3054b925
+  UMFontInterface: bc5dd878b2f6fffdac80e41fd36893c619683712
+  UMImageLoaderInterface: 78ab0fd45c2bcaee61957fa23858bf31f2bcb122
+  UMPermissionsInterface: 4f21b0c2aaf953cf041109ff44231b2a69e22836
+  UMReactNativeAdapter: 61ae88818058b7849bbf5b79bf97872cb3c8e0eb
+  UMSensorsInterface: 49bea41dcfcc041f0bbab27cfe4a6006f1dde0c0
+  UMTaskManagerInterface: 6cad5929dbc0a5b986ad4d77caac497d4de730a7
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
