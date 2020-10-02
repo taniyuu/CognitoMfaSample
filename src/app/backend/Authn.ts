@@ -17,6 +17,7 @@ Auth.configure(awsConfig);
 
 class CognitoAuth {
   async signIn(username: string, password: string) {
+    console.log("SIGNIN", Auth.configure());
     return await Auth.signIn(username, password);
   }
   async signUp(form: SignUpForm) {
