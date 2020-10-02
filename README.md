@@ -1,0 +1,2 @@
+# CognitoMfaSample
+CognitoのユーザプールをReact Nativeから叩いて遊んでみるリポジトリ（TOTPによるMFAに対応予定）
