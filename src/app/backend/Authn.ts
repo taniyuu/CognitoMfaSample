@@ -41,6 +41,18 @@ class CognitoAuth {
     const result = await Auth.confirmSignUp(username, code);
     console.log(result);
   }
+  // 現在のセッション情報を確認します
+  async currentSession() {
+    const result = await Auth.currentSession();
+    // console.log("Current User", result);
+    if (result) {
+      console.log("SESSION EXISTS.");
+    } else {
+      if (result) {
+        console.log("SESSION NOT FOUND.");
+      }
+    }
+  }
 }
 export default CognitoAuth;
 

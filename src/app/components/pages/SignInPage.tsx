@@ -27,6 +27,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [password, setPassword] = useState<string>("");
   const signIn = async () => {
     try {
+      await new CognitoAuth().currentSession();
       const user = await new CognitoAuth().signIn(username, password);
       const authUser: CognitoUser = user;
       const userSession = authUser.getSignInUserSession();
@@ -55,6 +56,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
     }
     // Alert.alert(`Simple Button pressed:${username}`);
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
