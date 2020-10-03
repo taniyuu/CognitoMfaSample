@@ -1,6 +1,5 @@
 import Auth from "@aws-amplify/auth";
 import { SignUpParams } from "@aws-amplify/auth/lib-esm/types";
-import { CognitoUser } from "amazon-cognito-identity-js";
 import { Config as AppConfig } from "react-native-config";
 
 const awsConfig = {
