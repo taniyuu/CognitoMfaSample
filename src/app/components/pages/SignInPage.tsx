@@ -27,7 +27,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [password, setPassword] = useState<string>("");
   const signIn = async () => {
     try {
-      await new CognitoAuth().currentSession();
+      // await new CognitoAuth().currentSession();
       const user = await new CognitoAuth().signIn(username, password);
       const authUser: CognitoUser = user;
       const userSession = authUser.getSignInUserSession();
