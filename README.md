@@ -29,3 +29,22 @@ npm run ios -- --simulator="iPhone X"
 ```
 npm run android
 ```
+
+機種を指定したい場合
+
+1. デバイスを特定する
+    ```
+     adb devices
+    ```
+1. 取得したデバイスIDを指定して起動
+    ```
+    npm run android -- --deviceId ="emulator-xxxx"
+    ```
+
+## トラブルシューティング
+### Windows環境で起動に失敗する
+`ANDROID_HOME`に加え、`ANDROID_SDK_ROOT`を登録してください。
+
+```
+ANDROID_SDK_ROOT=%ANDROID_HOME%
+```
