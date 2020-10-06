@@ -15,10 +15,22 @@ export type RootStackParamList = {
 const Stack = createStackNavigator();
 const Navigator: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="ログイン">
-      <Stack.Screen name="ログイン" component={SignInPage} />
-      <Stack.Screen name="新規登録" component={SignUpPage} />
-      <Stack.Screen name="確認コード入力" component={ConfirmCodePage} />
+    <Stack.Navigator initialRouteName="SignIn">
+      <Stack.Screen
+        name="SignIn"
+        component={SignInPage}
+        options={{ title: "ログイン" }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpPage}
+        options={{ title: "新規登録" }}
+      />
+      <Stack.Screen
+        name="ConfirmCode"
+        component={ConfirmCodePage}
+        options={{ title: "確認コード入力" }}
+      />
     </Stack.Navigator>
   );
 };

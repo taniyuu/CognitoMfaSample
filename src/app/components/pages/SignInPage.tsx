@@ -87,7 +87,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             secureTextEntry={true}
           />
           <Button title="ログイン" onPress={signIn} />
-          <Button title="新規登録" onPress={() => navigate("新規登録")} />
+          <Button title="新規登録" onPress={() => navigate("SignUp")} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
