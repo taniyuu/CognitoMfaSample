@@ -52,6 +52,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="default"
+            placeholderTextColor="gray"
             value={form.username}
             onChangeText={(username) =>
               setForm((state) => ({ ...state, username }))
@@ -63,6 +64,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="default"
+            placeholderTextColor="gray"
             value={form.familyName}
             onChangeText={(familyName) =>
               setForm((state) => ({ ...state, familyName }))
@@ -74,6 +76,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="default"
+            placeholderTextColor="gray"
             value={form.givenName}
             onChangeText={(givenName) =>
               setForm((state) => ({ ...state, givenName }))
@@ -85,6 +88,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="ascii-capable"
+            placeholderTextColor="gray"
             value={form.password}
             onChangeText={(password) =>
               setForm((state) => ({ ...state, password }))
@@ -97,6 +101,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="email-address"
+            placeholderTextColor="gray"
             value={form.email}
             onChangeText={(email) => setForm((state) => ({ ...state, email }))}
             placeholder="メールアドレス"
@@ -106,6 +111,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           <TextInput
             style={styles.formControl}
             keyboardType="number-pad"
+            placeholderTextColor="gray"
             value={form.phone}
             onChangeText={(phone) => setForm((state) => ({ ...state, phone }))}
             placeholder="電話番号(日本)"

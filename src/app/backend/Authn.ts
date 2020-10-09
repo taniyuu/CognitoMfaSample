@@ -53,6 +53,10 @@ class CognitoAuth {
       }
     }
   }
+  // サインアップ時の確認コードを再送します
+  async resendConfirmationCode(username: string) {
+    await Auth.resendSignUp(username);
+  }
 }
 export default CognitoAuth;
 

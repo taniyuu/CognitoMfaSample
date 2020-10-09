@@ -42,6 +42,16 @@ const ConfirmationPage: React.FC<Props> = ({
       Alert.alert("確認失敗", `${JSON.stringify(err)}`);
     }
   };
+
+  const resendConfirmationCode = async () => {
+    try {
+      await new CognitoAuth().resendConfirmationCode(username);
+      Alert.alert("再送しました", "確認してください。");
+    } catch (err) {
+      // 失敗時など
+      Alert.alert("再送失敗", `${JSON.stringify(err)}`);
+    }
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -64,6 +74,7 @@ const ConfirmationPage: React.FC<Props> = ({
             autoCapitalize="none"
           />
           <Button title="確認" onPress={confirmSignUp} />
+          <Button title="再送" onPress={resendConfirmationCode} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
