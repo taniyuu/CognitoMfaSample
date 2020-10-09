@@ -77,12 +77,14 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             value={username}
             onChangeText={(input) => setUsername(input)}
             placeholder="ユーザ名"
+            placeholderTextColor="gray"
             returnKeyType="done"
             autoCapitalize="none"
           />
           <View style={styles.formControl}>
             <TextInput
               style={styles.textInput}
+              placeholderTextColor="gray"
               keyboardType="ascii-capable"
               value={password}
               onChangeText={(input) => setPassword(input)}
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    height: 32,
+    height: 24,
   },
 
   eyeIcon: {
