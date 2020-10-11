@@ -8,7 +8,6 @@
     "test": "jest",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts .",
     "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts ."
-
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.5",
@@ -48,6 +47,7 @@
     "eslint": "^7.11.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.21.4",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "jest-expo": "~39.0.0",
     "typescript": "~3.9.5"
   },

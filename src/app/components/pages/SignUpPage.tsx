@@ -21,7 +21,7 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const SignUpPage: React.FC<Props> = ({navigation: {navigate}}) => {
+const SignUpPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [form, setForm] = useState<SignUpForm>({
     username: '',
     familyName: '',

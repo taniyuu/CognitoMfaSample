@@ -25,7 +25,7 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const SignInPage: React.FC<Props> = ({navigation: {navigate}}) => {
+const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [secure, setSecure] = useState<boolean>(true);

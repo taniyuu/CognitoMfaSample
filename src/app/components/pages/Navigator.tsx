@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   createStackNavigator,
-  StackScreenProps,
 } from '@react-navigation/stack';
 
 import SignInPage from './SignInPage';

@@ -28,7 +28,7 @@ const {width} = Dimensions.get('window'); // get window size
 const ConfirmationPage: React.FC<Props> = ({
   route,
   navigation: {dispatch},
-}) => {
+}: Props) => {
   const {username} = route.params;
   const [confirmCode, setConfirmCode] = useState<string>('');
   const confirmSignUp = async () => {
