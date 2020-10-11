@@ -13,9 +13,9 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import CognitoAuth from "../../backend/Authn";
+import CognitoAuth from "src/app/backend/Authn";
 import RNPickerSelect from "react-native-picker-select";
-import MyDatePicker from "../molecule/DatePicker";
+import MyDatePicker from "src/app/components/molecule/DatePicker";
 import Icon from "react-native-vector-icons/Ionicons";
 
 // Stack Navigation

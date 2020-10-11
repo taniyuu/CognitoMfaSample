@@ -12,7 +12,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import CognitoAuth from "../../backend/Authn";
+import CognitoAuth from "src/app/backend/Authn";
 import { RouteProp, StackActions } from "@react-navigation/native";
 import { RootStackParamList } from "./Navigator";
 

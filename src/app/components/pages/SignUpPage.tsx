@@ -12,7 +12,7 @@ import {
   Alert,
   Dimensions,
 } from "react-native";
-import CognitoAuth, { SignUpForm } from "../../backend/Authn";
+import CognitoAuth, { SignUpForm } from "src/app/backend/Authn";
 
 // Stack Navigation
 interface Props {
