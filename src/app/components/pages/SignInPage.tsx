@@ -71,8 +71,9 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <Text>Home Screen</Text>
+          <View style={styles.formControl}>
           <TextInput
-            style={styles.formControl}
+            style={styles.textInput}
             keyboardType="default"
             value={username}
             onChangeText={(input) => setUsername(input)}
@@ -81,6 +82,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             returnKeyType="done"
             autoCapitalize="none"
           />
+          </View>
           <View style={styles.formControl}>
             <TextInput
               style={styles.textInput}
@@ -96,7 +98,7 @@ const SignInPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             <Icon
               style={styles.eyeIcon}
               name={secure ? "ios-eye-off" : "ios-eye"}
-              size={25}
+              size={24}
               color="gray"
               onPress={() => setSecure(!secure)}
             />
@@ -130,7 +132,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     width: width * 0.8,
-    padding: 8,
     marginBottom: 8,
     borderColor: "gray",
     borderWidth: 1,
@@ -138,11 +139,12 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    height: 24,
+    paddingLeft:8
   },
 
   eyeIcon: {
     justifyContent: "flex-end",
     marginLeft: "auto",
+    padding: 8
   },
 });
