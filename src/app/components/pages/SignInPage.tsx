@@ -31,7 +31,7 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [secure, setSecure] = useState<boolean>(true);
   const signIn = async () => {
     try {
-      // await new CognitoAuth().currentSession();
+      await new CognitoAuth().currentSession();
       const user = await new CognitoAuth().signIn(username, password);
       const authUser: CognitoUser = user;
       const userSession = authUser.getSignInUserSession();
@@ -48,7 +48,8 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
         console.log('challengeName', user.challengeName);
         const {CODE_DELIVERY_DESTINATION: phoneNumber} = user.challengeParam;
         console.log('DESTINATION', phoneNumber);
-        Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
+        navigate('MfaAuthn', {phoneNumber, authUser});
+        // Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
       } else {
         // それ以外の場合は想定外なのでエラー
         throw Error;
@@ -58,7 +59,6 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
       console.log('Err: ', err);
       Alert.alert('エラー', JSON.stringify(err));
     }
-    // Alert.alert(`Simple Button pressed:${username}`);
   };
 
   return (

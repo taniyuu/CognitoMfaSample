@@ -2,13 +2,16 @@ import React from 'react';
 import {
   createStackNavigator,
 } from '@react-navigation/stack';
+import {CognitoUser} from 'amazon-cognito-identity-js';
 
-import SignInPage from './SignInPage';
-import SignUpPage from './SignUpPage';
-import ConfirmCodePage from './ConfirmCodePage';
+import SignInPage from 'src/app/components/pages/SignInPage';
+import SignUpPage from 'src/app/components/pages/SignUpPage';
+import ConfirmCodePage from 'src/app/components/pages/ConfirmCodePage';
+import MfaPage from 'src/app/components/pages/MfaPage';
 
 export type RootStackParamList = {
   SignUp: { username: string };
+  Mfa: { phoneNumber: string, user: CognitoUser };
 };
 
 const Stack = createStackNavigator();
@@ -29,6 +32,11 @@ const Navigator: React.FC = () => {
         name="ConfirmCode"
         component={ConfirmCodePage}
         options={{title: '確認コード入力'}}
+      />
+      <Stack.Screen
+        name="MfaAuthn"
+        component={MfaPage}
+        options={{title: '認証コード入力'}}
       />
     </Stack.Navigator>
   );
