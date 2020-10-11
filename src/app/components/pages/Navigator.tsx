@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 import {
   createStackNavigator,
   StackScreenProps,
-} from "@react-navigation/stack";
+} from '@react-navigation/stack';
 
-import SignInPage from "./SignInPage";
-import SignUpPage from "./SignUpPage";
-import ConfirmCodePage from "./ConfirmCodePage";
+import SignInPage from './SignInPage';
+import SignUpPage from './SignUpPage';
+import ConfirmCodePage from './ConfirmCodePage';
 
 export type RootStackParamList = {
   SignUp: { username: string };
@@ -19,17 +19,17 @@ const Navigator: React.FC = () => {
       <Stack.Screen
         name="SignIn"
         component={SignInPage}
-        options={{ title: "ログイン" }}
+        options={{title: 'ログイン'}}
       />
       <Stack.Screen
         name="SignUp"
         component={SignUpPage}
-        options={{ title: "新規登録" }}
+        options={{title: '新規登録'}}
       />
       <Stack.Screen
         name="ConfirmCode"
         component={ConfirmCodePage}
-        options={{ title: "確認コード入力" }}
+        options={{title: '確認コード入力'}}
       />
     </Stack.Navigator>
   );

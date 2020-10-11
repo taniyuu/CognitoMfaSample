@@ -5,7 +5,10 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .jsx,.js,.tsx,.ts .",
+    "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts ."
+
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.5",

@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Button, View } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import React, {useState} from 'react';
+import {Button, View} from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const MyDatePicker = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -14,7 +14,7 @@ const MyDatePicker = () => {
   };
 
   const handleConfirm = (date: Date) => {
-    console.warn("A date has been picked: ", date);
+    console.warn('A date has been picked: ', date);
     hideDatePicker();
   };
 
@@ -26,9 +26,9 @@ const MyDatePicker = () => {
         mode="date"
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
-        cancelTextIOS={"キャンセル"}
-        confirmTextIOS={"完了"}
-        headerTextIOS={"日付選択"}
+        cancelTextIOS={'キャンセル'}
+        confirmTextIOS={'完了'}
+        headerTextIOS={'日付選択'}
       />
     </View>
   );

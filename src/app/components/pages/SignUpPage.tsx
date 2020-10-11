@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -11,42 +11,42 @@ import {
   Button,
   Alert,
   Dimensions,
-} from "react-native";
-import CognitoAuth, { SignUpForm } from "src/app/backend/Authn";
+} from 'react-native';
+import CognitoAuth, {SignUpForm} from 'src/app/backend/Authn';
 
 // Stack Navigation
 interface Props {
   navigation: any;
 }
 
-const { width } = Dimensions.get("window"); //get window size
+const {width} = Dimensions.get('window'); // get window size
 
-const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
+const SignUpPage: React.FC<Props> = ({navigation: {navigate}}) => {
   const [form, setForm] = useState<SignUpForm>({
-    username: "",
-    familyName: "",
-    givenName: "",
-    password: "",
-    phone: "",
-    email: "",
+    username: '',
+    familyName: '',
+    givenName: '',
+    password: '',
+    phone: '',
+    email: '',
   });
   const signUp = async () => {
     try {
       await new CognitoAuth().signUp(form);
-      navigate("ConfirmCode", { username: form.username }); // 型が適当
+      navigate('ConfirmCode', {username: form.username}); // 型が適当
     } catch (err) {
       // 失敗時など
-      Alert.alert("登録失敗", `${JSON.stringify(err)}`);
+      Alert.alert('登録失敗', `${JSON.stringify(err)}`);
     }
   };
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
           <Text>SignUp Screen</Text>
           <TextInput
@@ -55,7 +55,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             placeholderTextColor="gray"
             value={form.username}
             onChangeText={(username) =>
-              setForm((state) => ({ ...state, username }))
+              setForm((state) => ({...state, username}))
             }
             placeholder="ユーザID"
             returnKeyType="done"
@@ -67,7 +67,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             placeholderTextColor="gray"
             value={form.familyName}
             onChangeText={(familyName) =>
-              setForm((state) => ({ ...state, familyName }))
+              setForm((state) => ({...state, familyName}))
             }
             placeholder="姓"
             returnKeyType="done"
@@ -79,7 +79,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             placeholderTextColor="gray"
             value={form.givenName}
             onChangeText={(givenName) =>
-              setForm((state) => ({ ...state, givenName }))
+              setForm((state) => ({...state, givenName}))
             }
             placeholder="名"
             returnKeyType="done"
@@ -91,7 +91,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             placeholderTextColor="gray"
             value={form.password}
             onChangeText={(password) =>
-              setForm((state) => ({ ...state, password }))
+              setForm((state) => ({...state, password}))
             }
             placeholder="パスワード"
             returnKeyType="done"
@@ -103,7 +103,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             keyboardType="email-address"
             placeholderTextColor="gray"
             value={form.email}
-            onChangeText={(email) => setForm((state) => ({ ...state, email }))}
+            onChangeText={(email) => setForm((state) => ({...state, email}))}
             placeholder="メールアドレス"
             returnKeyType="done"
             autoCapitalize="none"
@@ -113,7 +113,7 @@ const SignUpPage: React.FC<Props> = ({ navigation: { navigate } }) => {
             keyboardType="number-pad"
             placeholderTextColor="gray"
             value={form.phone}
-            onChangeText={(phone) => setForm((state) => ({ ...state, phone }))}
+            onChangeText={(phone) => setForm((state) => ({...state, phone}))}
             placeholder="電話番号(日本)"
             returnKeyType="done"
             autoCapitalize="none"
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     width: width * 0.8,
     padding: 8,
     marginBottom: 8,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 1,
   },
 });

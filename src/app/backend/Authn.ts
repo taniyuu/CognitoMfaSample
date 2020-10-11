@@ -1,6 +1,6 @@
-import Auth from "@aws-amplify/auth";
-import { SignUpParams } from "@aws-amplify/auth/lib-esm/types";
-import { Config as AppConfig } from "react-native-config";
+import Auth from '@aws-amplify/auth';
+import {SignUpParams} from '@aws-amplify/auth/lib-esm/types';
+import {Config as AppConfig} from 'react-native-config';
 
 const awsConfig = {
   Auth: {
@@ -16,12 +16,12 @@ Auth.configure(awsConfig);
 
 class CognitoAuth {
   async signIn(username: string, password: string) {
-    console.log("SIGNIN", Auth.configure());
+    console.log('SIGNIN', Auth.configure());
     return await Auth.signIn(username, password);
   }
   async signUp(form: SignUpForm) {
     console.log(Auth.configure());
-    const japanesePhoneNumberPrefix = "+81";
+    const japanesePhoneNumberPrefix = '+81';
     const params: SignUpParams = {
       username: form.username,
       password: form.password,
@@ -46,10 +46,10 @@ class CognitoAuth {
     const result = await Auth.currentSession();
     // console.log("Current User", result);
     if (result) {
-      console.log("SESSION EXISTS.");
+      console.log('SESSION EXISTS.');
     } else {
       if (result) {
-        console.log("SESSION NOT FOUND.");
+        console.log('SESSION NOT FOUND.');
       }
     }
   }
