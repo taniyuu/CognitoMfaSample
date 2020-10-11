@@ -41,7 +41,7 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
         // console.log("AccessToken", userSession.getAccessToken());
         // console.log("IdToken", userSession.getIdToken());
         // console.log("RefleshToken", userSession.getRefreshToken());
-      } else if (user.challengeName) {
+      } else if (user.challengeName && user.challengeName == 'SMS_MFA') {
         // チャレンジ(MFA)
         // console.log("USER", user);
         console.log('SESSION', user.Session);
