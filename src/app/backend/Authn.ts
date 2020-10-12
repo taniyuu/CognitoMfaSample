@@ -1,6 +1,7 @@
 import Auth from '@aws-amplify/auth';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types';
 import {Config as AppConfig} from 'react-native-config';
+import {CognitoUser} from 'amazon-cognito-identity-js';
 
 const awsConfig = {
   Auth: {
@@ -43,19 +44,21 @@ class CognitoAuth {
   }
   // 現在のセッション情報を確認します
   async currentSession() {
-    const result = await Auth.currentSession();
-    // console.log("Current User", result);
-    if (result) {
-      console.log('SESSION EXISTS.');
-    } else {
-      if (result) {
-        console.log('SESSION NOT FOUND.');
-      }
+    try {
+      const result = await Auth.currentSession();
+      console.log('Current User', result);
+      return result;
+    } catch (error) {
+      console.log('currentSession', error);
     }
   }
   // サインアップ時の確認コードを再送します
   async resendConfirmationCode(username: string) {
     await Auth.resendSignUp(username);
+  }
+  async respondToAuthChallenge(user: CognitoUser, code: string) {
+    const result = Auth.confirmSignIn(user, code, 'SMS_MFA');
+    console.log(result);
   }
 }
 export default CognitoAuth;
