@@ -1,20 +1,13 @@
 import React, {useEffect} from 'react';
-import {
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import CognitoAuth from 'src/app/backend/Authn';
-
-import SignInPage from 'src/app/components/pages/SignInPage';
-import SignUpPage from 'src/app/components/pages/SignUpPage';
-import ForgotPasswordPage from 'src/app/components/pages/ForgotPasswordPage';
-import ConfirmForgotPasswordPage
-  from 'src/app/components/pages/ConfirmForgotPasswordPage';
-import ConfirmCodePage from 'src/app/components/pages/ConfirmCodePage';
-import SplashScreen from 'src/app/components/pages/SplashScreen';
-import HomePage from 'src/app/components/pages/HomePage';
-import MfaPage from 'src/app/components/pages/MfaPage';
 import {useAuthState,
   useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
+
+import {SignInPage, SignUpPage, SplashScreen,
+  MfaPage, HomePage, ConfirmCodePage,
+  ForgotPasswordPage,
+  ConfirmForgotPasswordPage} from 'src/app/components/pages';
 
 export type RootStackParamList = {
   SignUp: { username: string };

@@ -26,7 +26,7 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const MfaPage: React.FC<Props> = ({
+export const MfaPage: React.FC<Props> = ({
   route,
 }: Props) => {
   const {phoneNumber} = route.params;
@@ -73,8 +73,6 @@ const MfaPage: React.FC<Props> = ({
     </KeyboardAvoidingView>
   );
 };
-
-export default MfaPage;
 
 const styles = StyleSheet.create({
   container: {

@@ -9,7 +9,7 @@ import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 import RNPickerSelect from 'react-native-picker-select';
 import MyDatePicker from 'src/app/components/molecule/DatePicker';
 
-const HomePage: React.FC = () => {
+export const HomePage: React.FC = () => {
   const dispatch = useAuthDispatch();
   const signOut = async () => {
     Alert.alert(
@@ -55,4 +55,3 @@ const HomePage: React.FC = () => {
     </View>
   );
 };
-export default HomePage;

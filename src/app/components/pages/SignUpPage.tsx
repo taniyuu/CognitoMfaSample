@@ -21,7 +21,8 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const SignUpPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
+export const SignUpPage:
+React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [form, setForm] = useState<SignUpForm>({
     username: '',
     familyName: '',
@@ -125,8 +126,6 @@ const SignUpPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
     </KeyboardAvoidingView>
   );
 };
-
-export default SignUpPage;
 
 const styles = StyleSheet.create({
   container: {

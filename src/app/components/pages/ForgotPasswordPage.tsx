@@ -20,7 +20,7 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const ForgotPasswordPage: React.FC<Props> =
+export const ForgotPasswordPage: React.FC<Props> =
 ({navigation: {navigate}}: Props) => {
   const [username, setUsername] = useState<string>('');
   const forgotPassword = async () => {
@@ -61,8 +61,6 @@ const ForgotPasswordPage: React.FC<Props> =
     </KeyboardAvoidingView>
   );
 };
-
-export default ForgotPasswordPage;
 
 const styles = StyleSheet.create({
   container: {
