@@ -21,7 +21,7 @@ class CognitoAuth {
     return await Auth.signIn(username, password);
   }
   async signOut() {
-    // TODO: これがグローバルサインアウトなのか不明
+    // ローカルサインアウト。グローバルサインアウトの場合はオプションをつける
     await Auth.signOut();
   }
   async signUp(form: SignUpForm) {
