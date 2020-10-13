@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
 import {RouteProp} from '@react-navigation/native';
-import {RootStackParamList} from './Navigator';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
 // Stack Navigation
@@ -26,7 +26,7 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const MfaPage: React.FC<Props> = ({
+export const MfaPage: React.FC<Props> = ({
   route,
 }: Props) => {
   const {phoneNumber} = route.params;
@@ -73,8 +73,6 @@ const MfaPage: React.FC<Props> = ({
     </KeyboardAvoidingView>
   );
 };
-
-export default MfaPage;
 
 const styles = StyleSheet.create({
   container: {

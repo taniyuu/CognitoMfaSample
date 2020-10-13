@@ -14,18 +14,18 @@ import {
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
 import {RouteProp, StackActions} from '@react-navigation/native';
-import {RootStackParamList} from './Navigator';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 
 // Stack Navigation
-type ConfirmationPageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
+type ConfirmCodePageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
 interface Props {
-  route: ConfirmationPageRouteProp;
+  route: ConfirmCodePageRouteProp;
   navigation: any;
 }
 
 const {width} = Dimensions.get('window'); // get window size
 
-const ConfirmationPage: React.FC<Props> = ({
+export const ConfirmCodePage: React.FC<Props> = ({
   route,
   navigation: {dispatch},
 }: Props) => {
@@ -80,8 +80,6 @@ const ConfirmationPage: React.FC<Props> = ({
     </KeyboardAvoidingView>
   );
 };
-
-export default ConfirmationPage;
 
 const styles = StyleSheet.create({
   container: {

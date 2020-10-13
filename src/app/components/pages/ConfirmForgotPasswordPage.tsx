@@ -1,4 +1,3 @@
-import {CognitoUser} from 'amazon-cognito-identity-js';
 import React, {useState} from 'react';
 import {
   View,
@@ -14,43 +13,35 @@ import {
   Dimensions,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
-import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {RouteProp, StackActions} from '@react-navigation/native';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 
 // Stack Navigation
+type ConfirmationPageRouteProp =
+RouteProp<RootStackParamList, 'ForgotPassword'>;
 interface Props {
+  route: ConfirmationPageRouteProp;
   navigation: any;
 }
 
 const {width} = Dimensions.get('window'); // get window size
 
-export const SignInPage:
-React.FC<Props> = ({navigation: {navigate}}: Props) => {
-  const [username, setUsername] = useState<string>('');
+export const ConfirmForgotPasswordPage: React.FC<Props> =
+({route, navigation: {dispatch}}: Props) => {
+  const {username} = route.params;
+  const [confirmCode, setConfirmCode] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  // FIXME マスキングが同じ変数を参照しているので、分離してください。
   const [secure, setSecure] = useState<boolean>(true);
-  const dispatch = useAuthDispatch();
-  const signIn = async () => {
+
+  const confirmForgotPassword = async () => {
     try {
-      const user = await CognitoAuth.signIn(username, password);
-      const authUser: CognitoUser = user;
-      const userSession = authUser.getSignInUserSession();
-      if (userSession) {
-        // ログイン成功
-        // FIXME トークンを入れるインタフェースになっているが、不要な気がする
-        dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
-      } else if (user.challengeName && user.challengeName == 'SMS_MFA') {
-        // チャレンジ(MFA)
-        console.log('SESSION', user.Session);
-        console.log('challengeName', user.challengeName);
-        const {CODE_DELIVERY_DESTINATION: phoneNumber} = user.challengeParam;
-        console.log('DESTINATION', phoneNumber);
-        navigate('MfaAuthn', {phoneNumber});
-        // Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
-      } else {
-        // それ以外の場合は想定外なのでエラー
-        throw Error;
-      }
+      await CognitoAuth
+          .confirmForgotPassword(username, confirmCode, password);
+      Alert.alert('再設定完了', 'ログイン画面に戻ります。', [
+        {onPress: () => dispatch(StackActions.popToTop())},
+      ]);
     } catch (err) {
       // ログイン失敗時など
       console.log('Err: ', err);
@@ -67,27 +58,16 @@ React.FC<Props> = ({navigation: {navigate}}: Props) => {
         <View
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
-          <Text>Home Screen</Text>
-          <View style={styles.formControl}>
-            <TextInput
-              style={styles.textInput}
-              keyboardType="default"
-              value={username}
-              onChangeText={(input) => setUsername(input)}
-              placeholder="ユーザ名"
-              placeholderTextColor="gray"
-              returnKeyType="done"
-              autoCapitalize="none"
-            />
-          </View>
+          <Text>{username}さん</Text>
+          <Text>検証コードを送信しました。</Text>
           <View style={styles.formControl}>
             <TextInput
               style={styles.textInput}
               placeholderTextColor="gray"
               keyboardType="ascii-capable"
-              value={password}
-              onChangeText={(input) => setPassword(input)}
-              placeholder="パスワード"
+              value={confirmCode}
+              onChangeText={(input) => setConfirmCode(input)}
+              placeholder="検証コード"
               returnKeyType="done"
               autoCapitalize="none"
               secureTextEntry={secure}
@@ -100,10 +80,27 @@ React.FC<Props> = ({navigation: {navigate}}: Props) => {
               onPress={() => setSecure(!secure)}
             />
           </View>
-          <Button title="ログイン" onPress={signIn} />
-          <Button title="新規登録" onPress={() => navigate('SignUp')} />
-          <Button title="パスワードをお忘れの場合"
-            onPress={() => navigate('ForgotPassword')} />
+          <View style={styles.formControl}>
+            <TextInput
+              style={styles.textInput}
+              placeholderTextColor="gray"
+              keyboardType="ascii-capable"
+              value={password}
+              onChangeText={(input) => setPassword(input)}
+              placeholder="新しいパスワード"
+              returnKeyType="done"
+              autoCapitalize="none"
+              secureTextEntry={secure}
+            />
+            <Icon
+              style={styles.eyeIcon}
+              name={secure ? 'ios-eye-off' : 'ios-eye'}
+              size={24}
+              color="gray"
+              onPress={() => setSecure(!secure)}
+            />
+          </View>
+          <Button title="再設定する" onPress={confirmForgotPassword} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

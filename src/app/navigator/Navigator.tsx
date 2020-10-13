@@ -1,21 +1,18 @@
 import React, {useEffect} from 'react';
-import {
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import CognitoAuth from 'src/app/backend/Authn';
-
-import SignInPage from 'src/app/components/pages/SignInPage';
-import SignUpPage from 'src/app/components/pages/SignUpPage';
-import ConfirmCodePage from 'src/app/components/pages/ConfirmCodePage';
-import SplashScreen from 'src/app/components/pages/SplashScreen';
-import HomePage from 'src/app/components/pages/HomePage';
-import MfaPage from 'src/app/components/pages/MfaPage';
 import {useAuthState,
   useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
+
+import {SignInPage, SignUpPage, SplashScreen,
+  MfaPage, HomePage, ConfirmCodePage,
+  ForgotPasswordPage,
+  ConfirmForgotPasswordPage} from 'src/app/components/pages';
 
 export type RootStackParamList = {
   SignUp: { username: string };
   Mfa: { phoneNumber: string };
+  ForgotPassword: { username: string };
 };
 
 const Stack = createStackNavigator();
@@ -52,6 +49,16 @@ const Navigator: React.FC = () => {
           name="SignUp"
           component={SignUpPage}
           options={{title: '新規登録'}}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordPage}
+          options={{title: 'アカウントを探す'}}
+        />
+        <Stack.Screen
+          name="ConfirmForgotPassword"
+          component={ConfirmForgotPasswordPage}
+          options={{title: 'パスワード再設定'}}
         />
         <Stack.Screen
           name="ConfirmCode"

@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native';
 
-const SplashScreen: React.FC = () => {
+export const SplashScreen: React.FC = () => {
   return (
     <View style={{flex: 1, alignItems: 'center',
       justifyContent: 'center'}}>
@@ -13,4 +13,3 @@ const SplashScreen: React.FC = () => {
     </View>
   );
 };
-export default SplashScreen;

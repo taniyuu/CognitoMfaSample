@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import Navigator from 'src/app/components/pages/Navigator';
+import Navigator from 'src/app/navigator/Navigator';
 import AuthProvider from 'src/app/components/molecule/AuthProvider';
 
 export default function App() {

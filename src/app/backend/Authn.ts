@@ -32,10 +32,12 @@ class CognitoAuth {
     this.userSession = user as CognitoUser;
     return user;
   }
+
   async signOut() {
     // ローカルサインアウト。グローバルサインアウトの場合はオプションをつける
     await Auth.signOut();
   }
+
   async signUp(form: SignUpForm) {
     console.log(Auth.configure());
     const japanesePhoneNumberPrefix = '+81';
@@ -53,11 +55,13 @@ class CognitoAuth {
     const result = await Auth.signUp(params);
     console.log(result);
   }
+
   async confirmSignUp(username: string, code: string) {
     console.log(Auth.configure());
     const result = await Auth.confirmSignUp(username, code);
     console.log(result);
   }
+
   // 現在のセッション情報を確認します
   async currentSession() {
     try {
@@ -68,6 +72,7 @@ class CognitoAuth {
       console.log('Error in currentSession:', error);
     }
   }
+
   // サインアップ時の確認コードを再送します
   async resendConfirmationCode(username: string) {
     await Auth.resendSignUp(username);
@@ -76,6 +81,14 @@ class CognitoAuth {
   async respondToAuthChallenge( code: string) {
     const result = await Auth.confirmSignIn(this.userSession, code, 'SMS_MFA');
     console.log('SMS_MFA_RESULT', result);
+  }
+  async forgotPassword( username: string) {
+    const result = await Auth.forgotPassword(username);
+    console.log('FORGOT_PASSWORD', result);
+  }
+
+  async confirmForgotPassword(username: string, code:string, password: string) {
+    await Auth.forgotPasswordSubmit(username, code, password);
   }
 }
 export default new CognitoAuth;
