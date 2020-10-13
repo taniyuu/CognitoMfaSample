@@ -14,6 +14,7 @@ import {
   Dimensions,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
+import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 import RNPickerSelect from 'react-native-picker-select';
 import MyDatePicker from 'src/app/components/molecule/DatePicker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,6 +30,7 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [secure, setSecure] = useState<boolean>(true);
+  const dispatch = useAuthDispatch();
   const signIn = async () => {
     try {
       const user = await new CognitoAuth().signIn(username, password);
@@ -36,10 +38,8 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
       const userSession = authUser.getSignInUserSession();
       if (userSession) {
         // ログイン成功
-        Alert.alert('ログイン完了');
-        // console.log("AccessToken", userSession.getAccessToken());
-        // console.log("IdToken", userSession.getIdToken());
-        // console.log("RefleshToken", userSession.getRefreshToken());
+        // FIXME トークンを入れるインタフェースになっているが、不要な気がする
+        dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
       } else if (user.challengeName && user.challengeName == 'SMS_MFA') {
         // チャレンジ(MFA)
         // console.log("USER", user);

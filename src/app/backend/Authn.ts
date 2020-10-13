@@ -20,6 +20,10 @@ class CognitoAuth {
     console.log('SIGNIN', Auth.configure());
     return await Auth.signIn(username, password);
   }
+  async signOut() {
+    // TODO: これがグローバルサインアウトなのか不明
+    await Auth.signOut();
+  }
   async signUp(form: SignUpForm) {
     console.log(Auth.configure());
     const japanesePhoneNumberPrefix = '+81';
@@ -46,10 +50,10 @@ class CognitoAuth {
   async currentSession() {
     try {
       const result = await Auth.currentSession();
-      console.log('Current User', result);
+      console.debug('Current User', result);
       return result;
     } catch (error) {
-      console.log('currentSession', error);
+      console.log('Error in currentSession:', error);
     }
   }
   // サインアップ時の確認コードを再送します
