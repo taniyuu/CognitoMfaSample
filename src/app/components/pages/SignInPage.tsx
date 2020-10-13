@@ -14,8 +14,7 @@ import {
   Dimensions,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
-import RNPickerSelect from 'react-native-picker-select';
-import MyDatePicker from 'src/app/components/molecule/DatePicker';
+import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 // Stack Navigation
@@ -29,26 +28,24 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [secure, setSecure] = useState<boolean>(true);
+  const dispatch = useAuthDispatch();
   const signIn = async () => {
     try {
-      // await new CognitoAuth().currentSession();
-      const user = await new CognitoAuth().signIn(username, password);
+      const user = await CognitoAuth.signIn(username, password);
       const authUser: CognitoUser = user;
       const userSession = authUser.getSignInUserSession();
       if (userSession) {
         // ログイン成功
-        Alert.alert('ログイン完了');
-        // console.log("AccessToken", userSession.getAccessToken());
-        // console.log("IdToken", userSession.getIdToken());
-        // console.log("RefleshToken", userSession.getRefreshToken());
+        // FIXME トークンを入れるインタフェースになっているが、不要な気がする
+        dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
       } else if (user.challengeName && user.challengeName == 'SMS_MFA') {
         // チャレンジ(MFA)
-        // console.log("USER", user);
         console.log('SESSION', user.Session);
         console.log('challengeName', user.challengeName);
         const {CODE_DELIVERY_DESTINATION: phoneNumber} = user.challengeParam;
         console.log('DESTINATION', phoneNumber);
-        Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
+        navigate('MfaAuthn', {phoneNumber});
+        // Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
       } else {
         // それ以外の場合は想定外なのでエラー
         throw Error;
@@ -58,7 +55,6 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
       console.log('Err: ', err);
       Alert.alert('エラー', JSON.stringify(err));
     }
-    // Alert.alert(`Simple Button pressed:${username}`);
   };
 
   return (
@@ -105,17 +101,6 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
           </View>
           <Button title="ログイン" onPress={signIn} />
           <Button title="新規登録" onPress={() => navigate('SignUp')} />
-          <RNPickerSelect
-            doneText={'完了'}
-            onValueChange={(value) => console.log(value)}
-            items={[
-              {label: 'Football', value: 'football'},
-              {label: 'Baseball', value: 'baseball'},
-              {label: 'Hockey', value: 'hockey'},
-            ]}
-          />
-
-          <MyDatePicker />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

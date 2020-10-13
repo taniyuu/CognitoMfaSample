@@ -13,11 +13,12 @@ import {
   Dimensions,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
-import {RouteProp, StackActions} from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from './Navigator';
+import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
 // Stack Navigation
-type ConfirmationPageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
+type ConfirmationPageRouteProp = RouteProp<RootStackParamList, 'Mfa'>;
 interface Props {
   route: ConfirmationPageRouteProp;
   navigation: any;
@@ -25,33 +26,24 @@ interface Props {
 
 const {width} = Dimensions.get('window'); // get window size
 
-const ConfirmationPage: React.FC<Props> = ({
+const MfaPage: React.FC<Props> = ({
   route,
-  navigation: {dispatch},
 }: Props) => {
-  const {username} = route.params;
+  const {phoneNumber} = route.params;
   const [confirmCode, setConfirmCode] = useState<string>('');
-  const confirmSignUp = async () => {
+  const dispatch = useAuthDispatch();
+  const respondToAuthChallenge = async () => {
     try {
-      await CognitoAuth.confirmSignUp(username, confirmCode);
-      Alert.alert('登録完了', 'ログイン画面に戻ります。', [
-        {onPress: () => dispatch(StackActions.popToTop())},
-      ]);
+      await CognitoAuth.respondToAuthChallenge(confirmCode);
+      // ログイン成功
+      // FIXME トークンを入れるインタフェースになっているが、不要な気がする
+      dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
     } catch (err) {
       // 失敗時など
-      Alert.alert('検証失敗', `${JSON.stringify(err)}`);
+      Alert.alert('認証失敗', `${JSON.stringify(err)}`);
     }
   };
 
-  const resendConfirmationCode = async () => {
-    try {
-      await CognitoAuth.resendConfirmationCode(username);
-      Alert.alert('再送しました', '確認してください。');
-    } catch (err) {
-      // 失敗時など
-      Alert.alert('再送失敗', `${JSON.stringify(err)}`);
-    }
-  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
@@ -61,27 +53,28 @@ const ConfirmationPage: React.FC<Props> = ({
         <View
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
-          <Text>Confirmation Screen</Text>
-          <Text>ユーザ名:{username}</Text>
+          <Text>MFA</Text>
+          <Text>認証コードを送信:{phoneNumber}</Text>
 
           <TextInput
             style={styles.formControl}
             keyboardType="number-pad"
             value={confirmCode}
             onChangeText={(input) => setConfirmCode(input)}
-            placeholder="検証コード"
+            placeholder="認証コード"
             returnKeyType="done"
             autoCapitalize="none"
+            secureTextEntry={true}
           />
-          <Button title="確認" onPress={confirmSignUp} />
-          <Button title="再送" onPress={resendConfirmationCode} />
+          <Button title="確認" onPress={respondToAuthChallenge} />
+          {/* <Button title="再送" onPress={resendConfirmationCode} /> */}
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
 };
 
-export default ConfirmationPage;
+export default MfaPage;
 
 const styles = StyleSheet.create({
   container: {

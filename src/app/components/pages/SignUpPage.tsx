@@ -32,7 +32,7 @@ const SignUpPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   });
   const signUp = async () => {
     try {
-      await new CognitoAuth().signUp(form);
+      await CognitoAuth.signUp(form);
       navigate('ConfirmCode', {username: form.username}); // 型が適当
     } catch (err) {
       // 失敗時など

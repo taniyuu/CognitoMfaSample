@@ -1,6 +1,7 @@
 import Auth from '@aws-amplify/auth';
 import {SignUpParams} from '@aws-amplify/auth/lib-esm/types';
 import {Config as AppConfig} from 'react-native-config';
+import {CognitoUser} from 'amazon-cognito-identity-js';
 
 const awsConfig = {
   Auth: {
@@ -15,9 +16,25 @@ const awsConfig = {
 Auth.configure(awsConfig);
 
 class CognitoAuth {
+  /** 現在のユーザセッション
+   *
+   * ※ 認証途中のユーザセッションを複数画面で引き継ぐ場合に利用する
+  */
+  userSession: CognitoUser | undefined;
+  constructor() {
+    // NOP
+  }
+
   async signIn(username: string, password: string) {
     console.log('SIGNIN', Auth.configure());
-    return await Auth.signIn(username, password);
+    const user = await Auth.signIn(username, password);
+    // 現在のユーザセッションを保持
+    this.userSession = user as CognitoUser;
+    return user;
+  }
+  async signOut() {
+    // ローカルサインアウト。グローバルサインアウトの場合はオプションをつける
+    await Auth.signOut();
   }
   async signUp(form: SignUpForm) {
     console.log(Auth.configure());
@@ -43,22 +60,25 @@ class CognitoAuth {
   }
   // 現在のセッション情報を確認します
   async currentSession() {
-    const result = await Auth.currentSession();
-    // console.log("Current User", result);
-    if (result) {
-      console.log('SESSION EXISTS.');
-    } else {
-      if (result) {
-        console.log('SESSION NOT FOUND.');
-      }
+    try {
+      const result = await Auth.currentSession();
+      console.debug('Current User', result);
+      return result;
+    } catch (error) {
+      console.log('Error in currentSession:', error);
     }
   }
   // サインアップ時の確認コードを再送します
   async resendConfirmationCode(username: string) {
     await Auth.resendSignUp(username);
   }
+
+  async respondToAuthChallenge( code: string) {
+    const result = await Auth.confirmSignIn(this.userSession, code, 'SMS_MFA');
+    console.log('SMS_MFA_RESULT', result);
+  }
 }
-export default CognitoAuth;
+export default new CognitoAuth;
 
 export type SignUpForm = {
   username: string;
