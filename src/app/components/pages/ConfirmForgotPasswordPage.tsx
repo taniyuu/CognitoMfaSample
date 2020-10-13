@@ -32,6 +32,7 @@ export const ConfirmForgotPasswordPage: React.FC<Props> =
   const {username} = route.params;
   const [confirmCode, setConfirmCode] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  // FIXME マスキングが同じ変数を参照しているので、分離してください。
   const [secure, setSecure] = useState<boolean>(true);
 
   const confirmForgotPassword = async () => {
