@@ -101,6 +101,8 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
           </View>
           <Button title="ログイン" onPress={signIn} />
           <Button title="新規登録" onPress={() => navigate('SignUp')} />
+          <Button title="パスワードをお忘れの場合"
+            onPress={() => navigate('ForgotPassword')} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

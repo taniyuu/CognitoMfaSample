@@ -77,6 +77,10 @@ class CognitoAuth {
     const result = await Auth.confirmSignIn(this.userSession, code, 'SMS_MFA');
     console.log('SMS_MFA_RESULT', result);
   }
+  async forgotPassword( username: string) {
+    const result = await Auth.forgotPassword(username);
+    console.log('FORGOT_PASSWORD', result);
+  }
 }
 export default new CognitoAuth;
 

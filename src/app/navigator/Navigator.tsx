@@ -6,6 +6,7 @@ import CognitoAuth from 'src/app/backend/Authn';
 
 import SignInPage from 'src/app/components/pages/SignInPage';
 import SignUpPage from 'src/app/components/pages/SignUpPage';
+import ForgotPasswordPage from 'src/app/components/pages/ForgotPasswordPage';
 import ConfirmCodePage from 'src/app/components/pages/ConfirmCodePage';
 import SplashScreen from 'src/app/components/pages/SplashScreen';
 import HomePage from 'src/app/components/pages/HomePage';
@@ -52,6 +53,11 @@ const Navigator: React.FC = () => {
           name="SignUp"
           component={SignUpPage}
           options={{title: '新規登録'}}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          component={ForgotPasswordPage}
+          options={{title: 'アカウントを探す'}}
         />
         <Stack.Screen
           name="ConfirmCode"

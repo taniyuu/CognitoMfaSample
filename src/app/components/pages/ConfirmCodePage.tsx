@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
 import {RouteProp, StackActions} from '@react-navigation/native';
-import {RootStackParamList} from './Navigator';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 
 // Stack Navigation
 type ConfirmationPageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
