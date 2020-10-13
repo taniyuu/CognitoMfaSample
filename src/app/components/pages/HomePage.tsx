@@ -12,14 +12,25 @@ import MyDatePicker from 'src/app/components/molecule/DatePicker';
 const HomePage: React.FC = () => {
   const dispatch = useAuthDispatch();
   const signOut = async () => {
-    try {
-      await new CognitoAuth().signOut();
-      dispatch({type: 'COMPLETE_LOGOUT'});
-    } catch (err) {
-    // ログイン失敗時など
-      console.log('Err: ', err);
-      Alert.alert('エラー', JSON.stringify(err));
-    }
+    Alert.alert(
+        '確認',
+        'ログアウトしますか',
+        [
+          {
+            text: 'はい',
+            onPress: async () => {
+              // FIXME: onPress内のエラーハンドリングがない
+              await new CognitoAuth().signOut();
+              dispatch({type: 'COMPLETE_LOGOUT'});
+            },
+            style: 'default',
+          },
+          {
+            text: 'いいえ',
+            style: 'cancel',
+          },
+        ],
+    );
   };
   return (
     <View style={{flex: 1, alignItems: 'center',
