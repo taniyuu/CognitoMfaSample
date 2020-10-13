@@ -39,7 +39,7 @@ const ConfirmationPage: React.FC<Props> = ({
       ]);
     } catch (err) {
       // 失敗時など
-      Alert.alert('確認失敗', `${JSON.stringify(err)}`);
+      Alert.alert('検証失敗', `${JSON.stringify(err)}`);
     }
   };
 
@@ -69,7 +69,7 @@ const ConfirmationPage: React.FC<Props> = ({
             keyboardType="number-pad"
             value={confirmCode}
             onChangeText={(input) => setConfirmCode(input)}
-            placeholder="確認コード"
+            placeholder="検証コード"
             returnKeyType="done"
             autoCapitalize="none"
           />

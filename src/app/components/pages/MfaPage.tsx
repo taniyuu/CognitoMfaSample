@@ -54,16 +54,17 @@ const MfaPage: React.FC<Props> = ({
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
           <Text>MFA</Text>
-          <Text>検証コードを送信:{phoneNumber}</Text>
+          <Text>認証コードを送信:{phoneNumber}</Text>
 
           <TextInput
             style={styles.formControl}
             keyboardType="number-pad"
             value={confirmCode}
             onChangeText={(input) => setConfirmCode(input)}
-            placeholder="確認コード"
+            placeholder="認証コード"
             returnKeyType="done"
             autoCapitalize="none"
+            secureTextEntry={true}
           />
           <Button title="確認" onPress={respondToAuthChallenge} />
           {/* <Button title="再送" onPress={resendConfirmationCode} /> */}
