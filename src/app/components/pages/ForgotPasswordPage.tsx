@@ -26,6 +26,7 @@ const ForgotPasswordPage: React.FC<Props> =
   const forgotPassword = async () => {
     try {
       await CognitoAuth.forgotPassword(username);
+      navigate('ConfirmForgotPassword', {username});
     } catch (err) {
       // ログイン失敗時など
       console.log('Err: ', err);
@@ -79,11 +80,5 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     paddingLeft: 8,
-  },
-
-  eyeIcon: {
-    justifyContent: 'flex-end',
-    marginLeft: 'auto',
-    padding: 8,
   },
 });
