@@ -65,7 +65,7 @@ class CognitoAuth {
     console.log(result);
   }
 }
-export default CognitoAuth;
+export default new CognitoAuth;
 
 export type SignUpForm = {
   username: string;

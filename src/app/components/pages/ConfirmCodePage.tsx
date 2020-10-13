@@ -33,7 +33,7 @@ const ConfirmationPage: React.FC<Props> = ({
   const [confirmCode, setConfirmCode] = useState<string>('');
   const confirmSignUp = async () => {
     try {
-      await new CognitoAuth().confirmSignUp(username, confirmCode);
+      await CognitoAuth.confirmSignUp(username, confirmCode);
       Alert.alert('登録完了', 'ログイン画面に戻ります。', [
         {onPress: () => dispatch(StackActions.popToTop())},
       ]);
@@ -45,7 +45,7 @@ const ConfirmationPage: React.FC<Props> = ({
 
   const resendConfirmationCode = async () => {
     try {
-      await new CognitoAuth().resendConfirmationCode(username);
+      await CognitoAuth.resendConfirmationCode(username);
       Alert.alert('再送しました', '確認してください。');
     } catch (err) {
       // 失敗時など

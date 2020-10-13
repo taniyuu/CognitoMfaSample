@@ -31,7 +31,7 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const dispatch = useAuthDispatch();
   const signIn = async () => {
     try {
-      const user = await new CognitoAuth().signIn(username, password);
+      const user = await CognitoAuth.signIn(username, password);
       const authUser: CognitoUser = user;
       const userSession = authUser.getSignInUserSession();
       if (userSession) {

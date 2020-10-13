@@ -13,7 +13,7 @@ import {
   Dimensions,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
-import {RouteProp, StackActions} from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from './Navigator';
 
 // Stack Navigation
@@ -33,7 +33,7 @@ const MfaPage: React.FC<Props> = ({
   const [confirmCode, setConfirmCode] = useState<string>('');
   const respondToAuthChallenge = async () => {
     try {
-      await new CognitoAuth().respondToAuthChallenge(user, confirmCode);
+      await CognitoAuth.respondToAuthChallenge(user, confirmCode);
       // Alert.alert('登録完了', 'ログイン画面に戻ります。', [
       //   {onPress: () => dispatch(StackActions.popToTop())},
       // ]);

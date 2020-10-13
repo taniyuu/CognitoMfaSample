@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
             text: 'はい',
             onPress: async () => {
               // FIXME: onPress内のエラーハンドリングがない
-              await new CognitoAuth().signOut();
+              await CognitoAuth.signOut();
               dispatch({type: 'COMPLETE_LOGOUT'});
             },
             style: 'default',

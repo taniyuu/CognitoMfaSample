@@ -27,7 +27,7 @@ const Navigator: React.FC = () => {
   // 初期起動時の認証状態を元に、遷移先を決める
   useEffect( () => {
     async function isAuthorized() {
-      if (await new CognitoAuth().currentSession()) {
+      if (await CognitoAuth.currentSession()) {
         dispatch({type: 'COMPLETE_LOGIN', token: 'dummy-token'});
       } else {
         dispatch({type: 'COMPLETE_LOGOUT'});
