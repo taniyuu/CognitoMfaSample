@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {
   createStackNavigator,
 } from '@react-navigation/stack';
-import {CognitoUser} from 'amazon-cognito-identity-js';
 import CognitoAuth from 'src/app/backend/Authn';
 
 import SignInPage from 'src/app/components/pages/SignInPage';
@@ -16,7 +15,7 @@ import {useAuthState,
 
 export type RootStackParamList = {
   SignUp: { username: string };
-  Mfa: { phoneNumber: string, user: CognitoUser };
+  Mfa: { phoneNumber: string };
 };
 
 const Stack = createStackNavigator();

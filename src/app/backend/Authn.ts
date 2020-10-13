@@ -16,9 +16,21 @@ const awsConfig = {
 Auth.configure(awsConfig);
 
 class CognitoAuth {
+  /** 現在のユーザセッション
+   *
+   * ※ 認証途中のユーザセッションを複数画面で引き継ぐ場合に利用する
+  */
+  userSession: CognitoUser | undefined;
+  constructor() {
+    // NOP
+  }
+
   async signIn(username: string, password: string) {
     console.log('SIGNIN', Auth.configure());
-    return await Auth.signIn(username, password);
+    const user = await Auth.signIn(username, password);
+    // 現在のユーザセッションを保持
+    this.userSession = user as CognitoUser;
+    return user;
   }
   async signOut() {
     // ローカルサインアウト。グローバルサインアウトの場合はオプションをつける
@@ -60,9 +72,10 @@ class CognitoAuth {
   async resendConfirmationCode(username: string) {
     await Auth.resendSignUp(username);
   }
-  async respondToAuthChallenge(user: CognitoUser, code: string) {
-    const result = Auth.confirmSignIn(user, code, 'SMS_MFA');
-    console.log(result);
+
+  async respondToAuthChallenge( code: string) {
+    const result = await Auth.confirmSignIn(this.userSession, code, 'SMS_MFA');
+    console.log('SMS_MFA_RESULT', result);
   }
 }
 export default new CognitoAuth;

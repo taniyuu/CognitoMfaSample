@@ -15,6 +15,7 @@ import {
 import CognitoAuth from 'src/app/backend/Authn';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from './Navigator';
+import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
 // Stack Navigation
 type ConfirmationPageRouteProp = RouteProp<RootStackParamList, 'Mfa'>;
@@ -27,19 +28,19 @@ const {width} = Dimensions.get('window'); // get window size
 
 const MfaPage: React.FC<Props> = ({
   route,
-  navigation: {dispatch},
 }: Props) => {
-  const {phoneNumber, user} = route.params;
+  const {phoneNumber} = route.params;
   const [confirmCode, setConfirmCode] = useState<string>('');
+  const dispatch = useAuthDispatch();
   const respondToAuthChallenge = async () => {
     try {
-      await CognitoAuth.respondToAuthChallenge(user, confirmCode);
-      // Alert.alert('登録完了', 'ログイン画面に戻ります。', [
-      //   {onPress: () => dispatch(StackActions.popToTop())},
-      // ]);
+      await CognitoAuth.respondToAuthChallenge(confirmCode);
+      // ログイン成功
+      // FIXME トークンを入れるインタフェースになっているが、不要な気がする
+      dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
     } catch (err) {
       // 失敗時など
-      Alert.alert('確認失敗', `${JSON.stringify(err)}`);
+      Alert.alert('認証失敗', `${JSON.stringify(err)}`);
     }
   };
 

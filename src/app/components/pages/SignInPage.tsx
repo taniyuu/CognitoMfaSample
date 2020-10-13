@@ -40,12 +40,11 @@ const SignInPage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
         dispatch({type: 'COMPLETE_LOGIN', token: 'DUMMY'});
       } else if (user.challengeName && user.challengeName == 'SMS_MFA') {
         // チャレンジ(MFA)
-        // console.log("USER", user);
         console.log('SESSION', user.Session);
         console.log('challengeName', user.challengeName);
         const {CODE_DELIVERY_DESTINATION: phoneNumber} = user.challengeParam;
         console.log('DESTINATION', phoneNumber);
-        navigate('MfaAuthn', {phoneNumber, authUser});
+        navigate('MfaAuthn', {phoneNumber});
         // Alert.alert('検証コードを送信', `送信先:${phoneNumber}`);
       } else {
         // それ以外の場合は想定外なのでエラー
