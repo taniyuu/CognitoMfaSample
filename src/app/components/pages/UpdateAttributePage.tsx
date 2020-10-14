@@ -31,11 +31,11 @@ export const UpdateAttributePage: React.FC<Props> = ({
   const attrKey='email';
   const requestForUpdateAttribute = async () => {
     try {
-      const sub =await Authn.updateAttribute(attrKey, alterValue);
-      if (sub) {
+      const username =await Authn.updateAttribute(attrKey, alterValue);
+      if (username) {
         // ページ遷移
         navigate('ConfirmUpdatedAttribute',
-            {username: sub, alterValue}); // 型が適当
+            {username, alterValue}); // 型が適当
       } else {
         // TODO 変更属性は今のところ確認必須
         // Alert.alert('変更完了', 'トップ画面に戻ります。', [

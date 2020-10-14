@@ -34,8 +34,8 @@ export const ConfirmUpdatedAttributePage: React.FC<Props> = ({
   const [confirmCode, setConfirmCode] = useState<string>('');
   const confirmSignUp = async () => {
     try {
-      await CognitoAuth.confirmSignUp(username, confirmCode);
-      Alert.alert('登録完了', 'ログイン画面に戻ります。', [
+      await CognitoAuth.confirmSignUp(username, confirmCode, true);
+      Alert.alert('属性更新完了', 'トップ画面に戻ります。', [
         {onPress: () => dispatch(StackActions.popToTop())},
       ]);
     } catch (err) {
@@ -53,8 +53,8 @@ export const ConfirmUpdatedAttributePage: React.FC<Props> = ({
         <View
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
-          <Text>{alterValue} に検証コードを送信しました</Text>
-
+          <Text>{alterValue} に</Text>
+          <Text>検証コードを送信しました</Text>
           <TextInput
             style={styles.formControl}
             keyboardType="number-pad"

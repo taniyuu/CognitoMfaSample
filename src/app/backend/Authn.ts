@@ -75,8 +75,8 @@ class CognitoAuth {
     console.log(result);
   }
 
-  async confirmSignUp(username: string, code: string) {
-    Auth.configure(this.getAuthConfig());
+  async confirmSignUp(username: string, code: string, isSub=false) {
+    Auth.configure(this.getAuthConfig(isSub));
     const result = await Auth.confirmSignUp(username, code);
     console.log(result);
   }
@@ -111,19 +111,23 @@ class CognitoAuth {
     };
 
     if (conditionList.find((condition)=>condition===name)) {
+      // 一定条件の場合、別のユーザプールに入れる
+      const username=user?.getUsername();
       const sub=await this.getAttributeValue('sub');
-      if (!sub) throw Error();
-      // TODO 一定条件の場合、別のユーザプールに入れる
+
+      if (!username||!sub) {
+        // 想定外
+        throw Error();
+      }
       Auth.configure(this.getAuthConfig(true));
       console.log(Auth.configure());
       const params: SignUpParams = {
-        username: sub,
+        username,
         password: sub,
         attributes: obj,
       };
-      const newUser=await Auth.signUp(params);
-      console.log(newUser);
-      return sub;
+      await Auth.signUp(params);
+      return username;
     } else {
       Auth.configure(this.getAuthConfig());
       const result = await Auth.updateUserAttributes(user, obj);
