@@ -8,8 +8,11 @@ import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
 import RNPickerSelect from 'react-native-picker-select';
 import MyDatePicker from 'src/app/components/molecule/DatePicker';
-
-export const HomePage: React.FC = () => {
+// Stack Navigation
+interface Props {
+  navigation: any;
+}
+export const HomePage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const dispatch = useAuthDispatch();
   const signOut = async () => {
     Alert.alert(
@@ -37,6 +40,10 @@ export const HomePage: React.FC = () => {
       justifyContent: 'center'}}>
       <Text>Hello World</Text>
       <Text>Home</Text>
+      <Button
+        title="メールアドレス変更"
+        onPress={()=>navigate('UpdateAttribute')}
+      />
       <Button
         title="ログアウト"
         onPress={signOut}

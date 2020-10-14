@@ -7,7 +7,8 @@ import {useAuthState,
 import {SignInPage, SignUpPage, SplashScreen,
   MfaPage, HomePage, ConfirmCodePage,
   ForgotPasswordPage,
-  ConfirmForgotPasswordPage} from 'src/app/components/pages';
+  ConfirmForgotPasswordPage,
+  UpdateAttributePage} from 'src/app/components/pages';
 
 export type RootStackParamList = {
   SignUp: { username: string };
@@ -36,7 +37,19 @@ const Navigator: React.FC = () => {
   if (state.status === 'Loading') {
     return <SplashScreen />;
   } else if (state.status === 'Authenticated') {
-    return <HomePage />;
+    return (
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{title: 'トップ'}}
+        />
+        <Stack.Screen
+          name="UpdateAttribute"
+          component={UpdateAttributePage}
+          options={{title: '属性変更'}}
+        />
+      </Stack.Navigator>);
   } else {
     return (
       <Stack.Navigator initialRouteName="SignIn">

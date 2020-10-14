@@ -6,3 +6,4 @@ export * from './HomePage';
 export * from './ConfirmCodePage';
 export * from './ForgotPasswordPage';
 export * from './ConfirmForgotPasswordPage';
+export * from './UpdateAttributePage';

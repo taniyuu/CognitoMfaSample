@@ -36,6 +36,7 @@ class CognitoAuth {
   async signOut() {
     // ローカルサインアウト。グローバルサインアウトの場合はオプションをつける
     await Auth.signOut();
+    this.userSession=undefined;
   }
 
   async signUp(form: SignUpForm) {
@@ -57,7 +58,6 @@ class CognitoAuth {
   }
 
   async confirmSignUp(username: string, code: string) {
-    console.log(Auth.configure());
     const result = await Auth.confirmSignUp(username, code);
     console.log(result);
   }
@@ -65,12 +65,31 @@ class CognitoAuth {
   // 現在のセッション情報を確認します
   async currentSession() {
     try {
-      const result = await Auth.currentSession();
-      console.debug('Current User', result);
-      return result;
+      const user:CognitoUser = await Auth.currentAuthenticatedUser();
+      // this.userAttributeList=await Auth.userAttributes(user);
+      return user;
     } catch (error) {
       console.log('Error in currentSession:', error);
     }
+  }
+
+  async getAttributeValue(attributeName:string) {
+    const user = await this.currentSession();
+    if (user) {
+      const userAttributes = await Auth.userAttributes(user);
+      return userAttributes
+          .find((userAttribute)=>userAttribute.getName()===attributeName)
+          ?.getValue();
+    }
+  }
+
+  async updateAttribute(name:string, value:string) {
+    const user = await this.currentSession();
+    const obj = {
+      [name]: value,
+    };
+    const result = await Auth.updateUserAttributes(user, obj);
+    console.log(result);
   }
 
   // サインアップ時の確認コードを再送します
