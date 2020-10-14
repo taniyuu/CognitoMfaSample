@@ -9,12 +9,9 @@ import {
   Platform,
   StyleSheet,
   Button,
-  Alert,
-  Dimensions,
+  Dimensions, Alert,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
-import {RouteProp, StackActions} from '@react-navigation/native';
-import {RootStackParamList} from 'src/app/navigator/Navigator';
 import Authn from 'src/app/backend/Authn';
 
 // Stack Navigation
@@ -27,13 +24,28 @@ interface Props {
 const {width} = Dimensions.get('window'); // get window size
 
 export const UpdateAttributePage: React.FC<Props> = ({
-  navigation: {dispatch},
+  navigation: {navigate},
 }: Props) => {
   const [alterValue, setAlterValue] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
   const attrKey='email';
-  const updateAttribute = async () => {
-    await Authn.updateAttribute(attrKey, alterValue);
+  const requestForUpdateAttribute = async () => {
+    try {
+      const sub =await Authn.updateAttribute(attrKey, alterValue);
+      if (sub) {
+        // ページ遷移
+        navigate('ConfirmUpdatedAttribute',
+            {username: sub, alterValue}); // 型が適当
+      } else {
+        // TODO 変更属性は今のところ確認必須
+        // Alert.alert('変更完了', 'トップ画面に戻ります。', [
+        //   {onPress: () => dispatch(StackActions.popToTop())},
+        // ]);
+      }
+    } catch (err) {
+      // 失敗時など
+      Alert.alert('送信失敗', `${JSON.stringify(err)}`);
+    }
   };
 
   useEffect(() => {
@@ -65,7 +77,7 @@ export const UpdateAttributePage: React.FC<Props> = ({
             returnKeyType="done"
             autoCapitalize="none"
           />
-          <Button title="確認" onPress={updateAttribute} />
+          <Button title="確認" onPress={requestForUpdateAttribute} />
         </View>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>

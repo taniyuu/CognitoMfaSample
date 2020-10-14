@@ -8,12 +8,14 @@ import {SignInPage, SignUpPage, SplashScreen,
   MfaPage, HomePage, ConfirmCodePage,
   ForgotPasswordPage,
   ConfirmForgotPasswordPage,
-  UpdateAttributePage} from 'src/app/components/pages';
+  UpdateAttributePage,
+  ConfirmUpdatedAttributePage} from 'src/app/components/pages';
 
 export type RootStackParamList = {
   SignUp: { username: string };
   Mfa: { phoneNumber: string };
   ForgotPassword: { username: string };
+  ConfirmUpdatedAttribute: { username: string, alterValue: string }
 };
 
 const Stack = createStackNavigator();
@@ -48,6 +50,11 @@ const Navigator: React.FC = () => {
           name="UpdateAttribute"
           component={UpdateAttributePage}
           options={{title: '属性変更'}}
+        />
+        <Stack.Screen
+          name="ConfirmUpdatedAttribute"
+          component={ConfirmUpdatedAttributePage}
+          options={{title: '属性変更の確認'}}
         />
       </Stack.Navigator>);
   } else {
