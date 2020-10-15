@@ -13,22 +13,26 @@ import {
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
 import Authn from 'src/app/backend/Authn';
+import {RouteProp} from '@react-navigation/native';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 
 // Stack Navigation
-// type ConfirmCodePageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
+type UpdateAttributePageRouteProp
+= RouteProp<RootStackParamList, 'UpdateAttribute'>;
 interface Props {
-  // route: ConfirmCodePageRouteProp;
+  route: UpdateAttributePageRouteProp;
   navigation: any;
 }
 
 const {width} = Dimensions.get('window'); // get window size
 
 export const UpdateAttributePage: React.FC<Props> = ({
+  route,
   navigation: {navigate},
 }: Props) => {
   const [alterValue, setAlterValue] = useState<string>('');
   const [currentValue, setCurrentValue] = useState<string>('');
-  const attrKey='email';
+  const {attrKey} = route.params;
   const requestForUpdateAttribute = async () => {
     try {
       const username =await Authn.updateAttribute(attrKey, alterValue);

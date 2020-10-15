@@ -16,6 +16,7 @@ export type RootStackParamList = {
   Mfa: { phoneNumber: string };
   ForgotPassword: { username: string };
   ConfirmUpdatedAttribute: { username: string, alterValue: string }
+  UpdateAttribute: { attrKey: string };
 };
 
 const Stack = createStackNavigator();

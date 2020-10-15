@@ -23,7 +23,7 @@ const awsConfigSub = {
     userPoolWebClientId: AppConfig.COGNITO_USERPOOL_CLIENT_ID_SUB,
   },
 };
-
+const japanesePhoneNumberPrefix = '+81';
 class CognitoAuth {
   /** 現在のユーザセッション
    *
@@ -59,7 +59,6 @@ class CognitoAuth {
 
   async signUp(form: SignUpForm) {
     Auth.configure(this.getAuthConfig());
-    const japanesePhoneNumberPrefix = '+81';
     const params: SignUpParams = {
       username: form.username,
       password: form.password,
@@ -104,7 +103,8 @@ class CognitoAuth {
   }
 
   async updateAttribute(name:string, value:string) {
-    const conditionList=['email'];
+    const conditionList=['email', 'phone_number'];
+    if (name==='phone_number')value=japanesePhoneNumberPrefix+value;
     const user = await this.currentSession();
     const obj = {
       [name]: value,

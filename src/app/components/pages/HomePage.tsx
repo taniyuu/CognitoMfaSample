@@ -10,6 +10,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import MyDatePicker from 'src/app/components/molecule/DatePicker';
 import {ListItem} from 'react-native-elements';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 // Stack Navigation
 interface Props {
@@ -40,34 +41,35 @@ export const HomePage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
         ],
     );
   };
-  const list = [
-    {
-      title: 'メールアドレス変更',
-      icon: 'ios-mail',
-      onPress: ()=>navigate('UpdateAttribute'),
-    },
-    {
-      title: 'ログアウト',
-      icon: 'ios-exit',
-      onPress: signOut,
-    },
-  ];
+
   return (
     <View style={{flex: 1, alignItems: 'center',
       justifyContent: 'center'}}>
       <Text>Home</Text>
       <View style={styles.listViewParent}>
-        {
-          list.map((item, i) => (
-            <ListItem key={i} bottomDivider onPress={item.onPress}>
-              <IonIcon name={item.icon} size={24}/>
-              <ListItem.Content>
-                <ListItem.Title>{item.title}</ListItem.Title>
-              </ListItem.Content>
-              <ListItem.Chevron />
-            </ListItem>
-          ))
-        }
+        <ListItem bottomDivider
+          onPress={()=>navigate('UpdateAttribute', {attrKey: 'email'})}>
+          <IonIcon name={'ios-mail'} size={24}/>
+          <ListItem.Content>
+            <ListItem.Title>メールアドレス変更</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+        <ListItem bottomDivider
+          onPress={()=>navigate('UpdateAttribute', {attrKey: 'phone_number'})}>
+          <FontAwesome name={'phone'} size={24}/>
+          <ListItem.Content>
+            <ListItem.Title>電話番号変更</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
+        <ListItem bottomDivider onPress={signOut}>
+          <IonIcon name={'ios-exit'} size={24}/>
+          <ListItem.Content>
+            <ListItem.Title>ログアウト</ListItem.Title>
+          </ListItem.Content>
+          <ListItem.Chevron />
+        </ListItem>
       </View>
 
       <RNPickerSelect
