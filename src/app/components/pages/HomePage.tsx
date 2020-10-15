@@ -1,17 +1,22 @@
 import React from 'react';
 import {
   View,
-  Text, Button, Alert,
+  Text, Alert, Dimensions, StyleSheet,
 } from 'react-native';
 import CognitoAuth from 'src/app/backend/Authn';
 import {useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
 import RNPickerSelect from 'react-native-picker-select';
 import MyDatePicker from 'src/app/components/molecule/DatePicker';
+import {ListItem} from 'react-native-elements';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+
 // Stack Navigation
 interface Props {
   navigation: any;
 }
+const {width} = Dimensions.get('window'); // get window size
+
 export const HomePage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
   const dispatch = useAuthDispatch();
   const signOut = async () => {
@@ -35,19 +40,36 @@ export const HomePage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
         ],
     );
   };
+  const list = [
+    {
+      title: 'メールアドレス変更',
+      icon: 'ios-mail',
+      onPress: ()=>navigate('UpdateAttribute'),
+    },
+    {
+      title: 'ログアウト',
+      icon: 'ios-exit',
+      onPress: signOut,
+    },
+  ];
   return (
     <View style={{flex: 1, alignItems: 'center',
       justifyContent: 'center'}}>
-      <Text>Hello World</Text>
       <Text>Home</Text>
-      <Button
-        title="メールアドレス変更"
-        onPress={()=>navigate('UpdateAttribute')}
-      />
-      <Button
-        title="ログアウト"
-        onPress={signOut}
-      />
+      <View style={styles.listViewParent}>
+        {
+          list.map((item, i) => (
+            <ListItem key={i} bottomDivider onPress={item.onPress}>
+              <IonIcon name={item.icon} size={24}/>
+              <ListItem.Content>
+                <ListItem.Title>{item.title}</ListItem.Title>
+              </ListItem.Content>
+              <ListItem.Chevron />
+            </ListItem>
+          ))
+        }
+      </View>
+
       <RNPickerSelect
         doneText={'完了'}
         onValueChange={(value) => console.log(value)}
@@ -62,3 +84,8 @@ export const HomePage: React.FC<Props> = ({navigation: {navigate}}: Props) => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  listViewParent: {
+    width: width * 0.8,
+  },
+});
