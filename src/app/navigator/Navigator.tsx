@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import CognitoAuth from 'src/app/backend/Authn';
+import Authn from 'src/app/backend/Authn';
 import {useAuthState,
   useAuthDispatch} from 'src/app/components/molecule/AuthProvider';
 
@@ -27,7 +27,7 @@ const Navigator: React.FC = () => {
   // 初期起動時の認証状態を元に、遷移先を決める
   useEffect( () => {
     async function isAuthorized() {
-      if (await CognitoAuth.currentSession()) {
+      if (await Authn.currentSession()) {
         dispatch({type: 'COMPLETE_LOGIN', token: 'dummy-token'});
       } else {
         dispatch({type: 'COMPLETE_LOGOUT'});
