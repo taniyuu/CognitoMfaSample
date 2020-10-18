@@ -2,7 +2,6 @@ import {CognitoUser} from 'amazon-cognito-identity-js';
 import React, {useState} from 'react';
 import {
   View,
-  Text,
   KeyboardAvoidingView,
   TextInput,
   TouchableWithoutFeedback,
@@ -67,7 +66,6 @@ React.FC<Props> = ({navigation: {navigate}}: Props) => {
         <View
           style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
         >
-          <Text>Home Screen</Text>
           <View style={styles.formControl}>
             <TextInput
               style={styles.textInput}
