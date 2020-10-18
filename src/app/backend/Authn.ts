@@ -103,7 +103,7 @@ class CognitoAuth {
   }
 
   async updateAttribute(name:string, value:string) {
-    const conditionList=['email', 'phone_number'];
+    const conditionList=['email', 'phone_number']; // 確認が必要な属性のリスト
     if (name==='phone_number')value=japanesePhoneNumberPrefix+value;
     const user = await this.currentSession();
     const obj = {
