@@ -12,11 +12,13 @@ import {
   Alert,
   Dimensions,
 } from 'react-native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from 'src/app/navigator/Navigator';
 import CognitoAuth, {SignUpForm} from 'src/app/backend/Authn';
 
 // Stack Navigation
 interface Props {
-  navigation: any;
+  navigation: StackNavigationProp<RootStackParamList, 'SignUp'>;
 }
 
 const {width} = Dimensions.get('window'); // get window size

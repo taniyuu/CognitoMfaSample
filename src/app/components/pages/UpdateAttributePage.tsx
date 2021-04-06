@@ -39,7 +39,7 @@ export const UpdateAttributePage: React.FC<Props> = ({
       if (username) {
         // ページ遷移
         navigate('ConfirmUpdatedAttribute',
-            {username, alterValue}); // 型が適当
+            {username:attrKey, alterValue}); // 型が適当
       } else {
         // TODO 変更属性は今のところ確認必須
         // Alert.alert('変更完了', 'トップ画面に戻ります。', [
@@ -53,12 +53,18 @@ export const UpdateAttributePage: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    async function fetchData() {
-      const attribute=await CognitoAuth.getAttributeValue(attrKey)||'';
-      setCurrentValue(attribute);
-    }
-    fetchData();
-  }, []);
+    (async () => {
+      try {
+        const attribute=await CognitoAuth.getAttributeValue(attrKey)||'';
+        setCurrentValue(attribute);
+      } catch (err) {
+        if (err.code==='NotAuthorizedException') {
+        // 失敗時など
+          Alert.alert('送信失敗', `${JSON.stringify(err)}`);
+        }
+      }
+    })();
+  }, [attrKey]);
 
   return (
     <KeyboardAvoidingView
@@ -73,7 +79,8 @@ export const UpdateAttributePage: React.FC<Props> = ({
 
           <TextInput
             style={styles.formControl}
-            keyboardType="number-pad"
+            keyboardType={
+              attrKey==='phone_number' ? 'number-pad':'email-address'}
             value={alterValue}
             onChangeText={(input) => setAlterValue(input)}
             placeholder="更新後の値"
