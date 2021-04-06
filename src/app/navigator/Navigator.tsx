@@ -12,28 +12,34 @@ import {SignInPage, SignUpPage, SplashScreen,
   ConfirmUpdatedAttributePage} from 'src/app/components/pages';
 
 export type RootStackParamList = {
-  SignUp: { username: string };
+  Home:undefined;
+  SignIn:undefined;
+  ImagePickerExample:undefined;
+  TestGesture:undefined;
+  ConfirmForgotPassword:undefined;
+  ConfirmCode:{ username: string };
+  MfaAuthn:undefined;
+  SignUp: undefined;
   Mfa: { phoneNumber: string };
   ForgotPassword: { username: string };
   ConfirmUpdatedAttribute: { username: string, alterValue: string }
   UpdateAttribute: { attrKey: string };
 };
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 const Navigator: React.FC = () => {
   const state = useAuthState();
   const dispatch = useAuthDispatch();
 
   // 初期起動時の認証状態を元に、遷移先を決める
   useEffect( () => {
-    async function isAuthorized() {
+    (async () => {
       if (await Authn.currentSession()) {
         dispatch({type: 'COMPLETE_LOGIN', token: 'dummy-token'});
       } else {
         dispatch({type: 'COMPLETE_LOGOUT'});
       }
-    }
-    isAuthorized();
+    })();
   }, [dispatch]);
 
 

@@ -17,7 +17,7 @@ import {RouteProp, StackActions} from '@react-navigation/native';
 import {RootStackParamList} from 'src/app/navigator/Navigator';
 
 // Stack Navigation
-type ConfirmCodePageRouteProp = RouteProp<RootStackParamList, 'SignUp'>;
+type ConfirmCodePageRouteProp = RouteProp<RootStackParamList, 'ConfirmCode'>;
 interface Props {
   route: ConfirmCodePageRouteProp;
   navigation: any;
