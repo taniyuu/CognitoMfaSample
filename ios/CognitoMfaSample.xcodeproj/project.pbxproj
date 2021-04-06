@@ -29,6 +29,7 @@
 		6C2E3173556A471DD304B334 /* Pods-CognitoMfaSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitoMfaSample.debug.xcconfig"; path = "Target Support Files/Pods-CognitoMfaSample/Pods-CognitoMfaSample.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-CognitoMfaSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CognitoMfaSample.release.xcconfig"; path = "Target Support Files/Pods-CognitoMfaSample/Pods-CognitoMfaSample.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = CognitoMfaSample/SplashScreen.storyboard; sourceTree = "<group>"; };
+		B6325A82261BF65F003F02AF /* PersonalAccount.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = PersonalAccount.xcconfig; sourceTree = "<group>"; };
 		B67E03E5252F383F00B4E1D5 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		B67E03E6252F383F00B4E1D5 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		B67E03E7252F383F00B4E1D5 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Regular.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B6325A82261BF65F003F02AF /* PersonalAccount.xcconfig */,
 				B67E03E2252F35C700B4E1D5 /* Fonts */,
 				13B07FAE1A68108700A75B9A /* CognitoMfaSample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -367,7 +369,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = "${CODE_SIGN_STYLE}";
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "${DEVELOPMENT_TEAM}";
 				ENABLE_BITCODE = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -382,8 +387,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.name.CognitoMfaSample;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.name.CognitoMfaSample.${PERSONAL_IDENTIFIER}";
 				PRODUCT_NAME = CognitoMfaSample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -396,7 +402,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				INFOPLIST_FILE = CognitoMfaSample/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -408,6 +416,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.name.CognitoMfaSample;
 				PRODUCT_NAME = CognitoMfaSample;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -415,6 +424,7 @@
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6325A82261BF65F003F02AF /* PersonalAccount.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
